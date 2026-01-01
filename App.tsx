@@ -18,9 +18,6 @@ const App: React.FC = () => {
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const mailToLink = `mailto:${PROFILE.email}`;
-  const telLink = `tel:${PROFILE.phone}`;
-
   return (
     <div className="min-h-screen text-white bg-black selection:bg-indigo-500/40 overflow-x-hidden">
       {/* Background Lighting */}
@@ -34,34 +31,60 @@ const App: React.FC = () => {
           : 'bg-transparent py-10 border-b border-transparent'
       }`}>
         <div className="max-w-7xl mx-auto px-8 flex justify-between items-center">
-          <a href="#" className="text-2xl font-black tracking-tighter font-display group">
+          <a href="#" className="text-2xl font-black tracking-tighter font-display group relative z-[110]">
             RK<span className="text-indigo-500 group-hover:text-indigo-400 transition-colors duration-500">.</span>
           </a>
           
-          <div className="hidden lg:flex items-center gap-12 text-[10px] font-bold uppercase tracking-[0.4em] text-zinc-500">
+          <div className="hidden lg:flex items-center gap-12 text-[10px] font-bold uppercase tracking-[0.4em] text-zinc-500 relative z-[110]">
             <button onClick={() => scrollTo('impact')} className="hover:text-white transition-all cursor-pointer">Impact</button>
             <button onClick={() => scrollTo('experience')} className="hover:text-white transition-all cursor-pointer">Career</button>
             <button onClick={() => scrollTo('skills')} className="hover:text-white transition-all cursor-pointer">About</button>
           </div>
 
-          <div className="flex items-center gap-4 md:gap-8">
-            <div className="hidden sm:flex items-center gap-2 pr-4 border-r border-white/10">
-              <a href={mailToLink} title="Email Me" className="p-2 text-zinc-500 hover:text-white transition-all">
-                <Mail size={18} />
+          <div className="flex items-center gap-4 md:gap-8 relative z-[110]">
+            <div className="hidden sm:flex items-center gap-1 pr-4 border-r border-white/10">
+              <a 
+                onClick={() => {
+                  window.location.href = `mailto:${PROFILE.email}`;
+                }}
+                title="Email Me" 
+                className="p-3 text-zinc-500 hover:text-white transition-all inline-flex items-center justify-center cursor-pointer"
+              >
+                <Mail size={20} />
               </a>
-              <a href="https://www.linkedin.com/in/rushikulkarni" target="_blank" rel="noopener noreferrer" title="LinkedIn Profile" className="p-2 text-zinc-500 hover:text-white transition-all">
-                <Linkedin size={18} />
+              <a 
+                href="https://www.linkedin.com/in/rushikulkarni" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                title="LinkedIn Profile" 
+                className="p-3 text-zinc-500 hover:text-white transition-all inline-flex items-center justify-center"
+              >
+                <Linkedin size={20} />
               </a>
-              <a href="https://github.com/Rushi-Kulkarni-NIT-Trichy" target="_blank" rel="noopener noreferrer" title="GitHub Profile" className="p-2 text-zinc-500 hover:text-white transition-all">
-                <Github size={18} />
+              <a 
+                href="https://github.com/Rushi-Kulkarni-NIT-Trichy" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                title="GitHub Profile" 
+                className="p-3 text-zinc-500 hover:text-white transition-all inline-flex items-center justify-center"
+              >
+                <Github size={20} />
               </a>
-              <a href={telLink} title="Call Me" className="p-2 text-zinc-500 hover:text-white transition-all">
-                <Phone size={18} />
+              <a 
+                onClick={() => {
+                  window.location.href = `tel:${PROFILE.phone}`;
+                }}
+                title="Call Me" 
+                className="p-3 text-zinc-500 hover:text-white transition-all inline-flex items-center justify-center cursor-pointer"
+              >
+                <Phone size={20} />
               </a>
             </div>
             <a 
-              href={mailToLink}
-              className="px-5 md:px-7 py-2.5 bg-white text-black rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-indigo-600 hover:text-white transition-all text-center"
+              onClick={() => {
+                window.location.href = `mailto:${PROFILE.email}`;
+              }}
+              className="px-5 md:px-7 py-3 bg-white text-black rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-indigo-600 hover:text-white transition-all text-center cursor-pointer font-bold"
             >
               Get In Touch
             </a>
@@ -82,7 +105,7 @@ const App: React.FC = () => {
               {PROFILE.role}
             </p>
 
-            <p className="text-xl md:text-2xl text-zinc-400 leading-relaxed font-light mb-16 max-w-4xl">
+            <p className="text-xl md:text-2xl text-zinc-400 leading-relaxed font-light mb-16 max-w-4xl whitespace-pre-line">
               {PROFILE.bio}
             </p>
           </div>
@@ -250,22 +273,27 @@ const App: React.FC = () => {
             Open to Product Manager opportunities in impact-driven product teams.
           </p>
           
-          <div className="flex flex-col md:flex-row items-center justify-center gap-10 mb-24">
-            <a 
-              href={mailToLink} 
-              className="px-14 py-6 bg-white text-black rounded-full font-bold text-xl hover:bg-indigo-600 hover:text-white transition-all flex items-center gap-5 shadow-2xl shadow-indigo-500/10 cursor-pointer"
+          <div className="flex flex-col md:flex-row items-center justify-center gap-10 mb-24 relative z-[30]">
+            <a
+              onClick={() => {
+                window.location.href =
+                  "mailto:nittrichy.rushi@gmail.com?subject=Let’s%20Connect&body=Hi%20Rushikesh,%0A%0ASaw%20your%20profile%20and%20would%20love%20to%20connect.";
+              }}
+              className="px-14 py-6 bg-white text-black rounded-full font-bold text-xl hover:bg-indigo-600 hover:text-white transition-all flex items-center gap-5 cursor-pointer shadow-2xl shadow-indigo-500/10"
             >
               <Send size={24} /> Start Conversation
             </a>
             <a 
-              href={telLink} 
+              onClick={() => {
+                window.location.href = `tel:${PROFILE.phone}`;
+              }}
               className="text-zinc-500 hover:text-white font-bold text-xl transition-colors cursor-pointer"
             >
               Call Now
             </a>
           </div>
           
-          <div className="flex justify-center items-center gap-14 text-zinc-700">
+          <div className="flex justify-center items-center gap-14 text-zinc-700 relative z-[30]">
             <a href="https://www.linkedin.com/in/rushikulkarni" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-all hover:scale-110 font-bold uppercase tracking-[0.4em] text-[10px] cursor-pointer">LinkedIn</a>
             <a href="https://github.com/Rushi-Kulkarni-NIT-Trichy" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-all hover:scale-110 font-bold uppercase tracking-[0.4em] text-[10px] cursor-pointer">GitHub</a>
           </div>

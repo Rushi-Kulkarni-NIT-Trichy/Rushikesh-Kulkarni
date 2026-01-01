@@ -18,17 +18,8 @@ const App: React.FC = () => {
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const emailBody = encodeURIComponent("Hey Rushikesh,\n\nCame across your profile and would like to connect.\n\nBest,");
-  
-  const handleEmail = (e?: React.MouseEvent) => {
-    if (e) e.preventDefault();
-    window.location.href = `mailto:${PROFILE.email}?body=${emailBody}`;
-  };
-
-  const handleCall = (e?: React.MouseEvent) => {
-    if (e) e.preventDefault();
-    window.location.href = `tel:${PROFILE.phone}`;
-  };
+  const mailToLink = `mailto:${PROFILE.email}`;
+  const telLink = `tel:${PROFILE.phone}`;
 
   return (
     <div className="min-h-screen text-white bg-black selection:bg-indigo-500/40 overflow-x-hidden">
@@ -55,17 +46,25 @@ const App: React.FC = () => {
 
           <div className="flex items-center gap-4 md:gap-8">
             <div className="hidden sm:flex items-center gap-2 pr-4 border-r border-white/10">
-              <button onClick={handleEmail} title="Email Me" className="p-2 text-zinc-500 hover:text-white transition-all cursor-pointer"><Mail size={18} /></button>
-              <a href="https://www.linkedin.com/in/rushikulkarni" target="_blank" rel="noopener noreferrer" title="LinkedIn Profile" className="p-2 text-zinc-500 hover:text-white transition-all cursor-pointer"><Linkedin size={18} /></a>
-              <a href="https://github.com/Rushi-Kulkarni-NIT-Trichy" target="_blank" rel="noopener noreferrer" title="GitHub Profile" className="p-2 text-zinc-500 hover:text-white transition-all cursor-pointer"><Github size={18} /></a>
-              <button onClick={handleCall} title="Call Me" className="p-2 text-zinc-500 hover:text-white transition-all cursor-pointer"><Phone size={18} /></button>
+              <a href={mailToLink} title="Email Me" className="p-2 text-zinc-500 hover:text-white transition-all">
+                <Mail size={18} />
+              </a>
+              <a href="https://www.linkedin.com/in/rushikulkarni" target="_blank" rel="noopener noreferrer" title="LinkedIn Profile" className="p-2 text-zinc-500 hover:text-white transition-all">
+                <Linkedin size={18} />
+              </a>
+              <a href="https://github.com/Rushi-Kulkarni-NIT-Trichy" target="_blank" rel="noopener noreferrer" title="GitHub Profile" className="p-2 text-zinc-500 hover:text-white transition-all">
+                <Github size={18} />
+              </a>
+              <a href={telLink} title="Call Me" className="p-2 text-zinc-500 hover:text-white transition-all">
+                <Phone size={18} />
+              </a>
             </div>
-            <button 
-              onClick={handleEmail}
-              className="px-5 md:px-7 py-2.5 bg-white text-black rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-indigo-600 hover:text-white transition-all cursor-pointer relative z-10"
+            <a 
+              href={mailToLink}
+              className="px-5 md:px-7 py-2.5 bg-white text-black rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-indigo-600 hover:text-white transition-all text-center"
             >
               Get In Touch
-            </button>
+            </a>
           </div>
         </div>
       </nav>
@@ -252,18 +251,18 @@ const App: React.FC = () => {
           </p>
           
           <div className="flex flex-col md:flex-row items-center justify-center gap-10 mb-24">
-            <button 
-              onClick={handleEmail} 
-              className="px-14 py-6 bg-white text-black rounded-full font-bold text-xl hover:bg-indigo-600 hover:text-white transition-all flex items-center gap-5 shadow-2xl shadow-indigo-500/10 cursor-pointer relative z-30"
+            <a 
+              href={mailToLink} 
+              className="px-14 py-6 bg-white text-black rounded-full font-bold text-xl hover:bg-indigo-600 hover:text-white transition-all flex items-center gap-5 shadow-2xl shadow-indigo-500/10 cursor-pointer"
             >
               <Send size={24} /> Start Conversation
-            </button>
-            <button 
-              onClick={handleCall} 
-              className="text-zinc-500 hover:text-white font-bold text-xl transition-colors cursor-pointer relative z-30"
+            </a>
+            <a 
+              href={telLink} 
+              className="text-zinc-500 hover:text-white font-bold text-xl transition-colors cursor-pointer"
             >
               Call Now
-            </button>
+            </a>
           </div>
           
           <div className="flex justify-center items-center gap-14 text-zinc-700">

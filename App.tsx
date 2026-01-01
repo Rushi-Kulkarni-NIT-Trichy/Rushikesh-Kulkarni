@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Mail, Github, Linkedin, ArrowRight, MapPin, Send, Plus, GraduationCap, Briefcase, Trophy, Phone } from 'lucide-react';
+import { Mail, Github, Linkedin, Send, Plus, GraduationCap, Briefcase, Trophy, Phone } from 'lucide-react';
 import { PROFILE, PROJECTS, EXPERIENCE, EDUCATION, AWARDS, SKILLS } from './constants';
 
 const App: React.FC = () => {
@@ -19,6 +19,16 @@ const App: React.FC = () => {
   };
 
   const emailBody = encodeURIComponent("Hey Rushikesh,\n\nCame across your profile and would like to connect.\n\nBest,");
+  
+  const handleEmail = (e?: React.MouseEvent) => {
+    if (e) e.preventDefault();
+    window.location.href = `mailto:${PROFILE.email}?body=${emailBody}`;
+  };
+
+  const handleCall = (e?: React.MouseEvent) => {
+    if (e) e.preventDefault();
+    window.location.href = `tel:${PROFILE.phone}`;
+  };
 
   return (
     <div className="min-h-screen text-white bg-black selection:bg-indigo-500/40 overflow-x-hidden">
@@ -38,24 +48,24 @@ const App: React.FC = () => {
           </a>
           
           <div className="hidden lg:flex items-center gap-12 text-[10px] font-bold uppercase tracking-[0.4em] text-zinc-500">
-            <button onClick={() => scrollTo('impact')} className="hover:text-white transition-all">Impact</button>
-            <button onClick={() => scrollTo('experience')} className="hover:text-white transition-all">Career</button>
-            <button onClick={() => scrollTo('skills')} className="hover:text-white transition-all">About</button>
+            <button onClick={() => scrollTo('impact')} className="hover:text-white transition-all cursor-pointer">Impact</button>
+            <button onClick={() => scrollTo('experience')} className="hover:text-white transition-all cursor-pointer">Career</button>
+            <button onClick={() => scrollTo('skills')} className="hover:text-white transition-all cursor-pointer">About</button>
           </div>
 
-          <div className="flex items-center gap-8">
-            <div className="hidden sm:flex items-center gap-6 pr-6 border-r border-white/10">
-              <a href={`mailto:${PROFILE.email}?body=${emailBody}`} title="Email Me" className="text-zinc-500 hover:text-white transition-all"><Mail size={16} /></a>
-              <a href="https://www.linkedin.com/in/rushikulkarni" target="_blank" rel="noopener noreferrer" title="LinkedIn Profile" className="text-zinc-500 hover:text-white transition-all"><Linkedin size={16} /></a>
-              <a href="https://github.com/Rushi-Kulkarni-NIT-Trichy" target="_blank" rel="noopener noreferrer" title="GitHub Profile" className="text-zinc-500 hover:text-white transition-all"><Github size={16} /></a>
-              <a href={`tel:${PROFILE.phone}`} title="Call Me" className="text-zinc-500 hover:text-white transition-all"><Phone size={16} /></a>
+          <div className="flex items-center gap-4 md:gap-8">
+            <div className="hidden sm:flex items-center gap-2 pr-4 border-r border-white/10">
+              <button onClick={handleEmail} title="Email Me" className="p-2 text-zinc-500 hover:text-white transition-all cursor-pointer"><Mail size={18} /></button>
+              <a href="https://www.linkedin.com/in/rushikulkarni" target="_blank" rel="noopener noreferrer" title="LinkedIn Profile" className="p-2 text-zinc-500 hover:text-white transition-all cursor-pointer"><Linkedin size={18} /></a>
+              <a href="https://github.com/Rushi-Kulkarni-NIT-Trichy" target="_blank" rel="noopener noreferrer" title="GitHub Profile" className="p-2 text-zinc-500 hover:text-white transition-all cursor-pointer"><Github size={18} /></a>
+              <button onClick={handleCall} title="Call Me" className="p-2 text-zinc-500 hover:text-white transition-all cursor-pointer"><Phone size={18} /></button>
             </div>
-            <a 
-              href={`mailto:${PROFILE.email}?body=${emailBody}`}
-              className="px-7 py-2.5 bg-white text-black rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-indigo-600 hover:text-white transition-all"
+            <button 
+              onClick={handleEmail}
+              className="px-5 md:px-7 py-2.5 bg-white text-black rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-indigo-600 hover:text-white transition-all cursor-pointer relative z-10"
             >
               Get In Touch
-            </a>
+            </button>
           </div>
         </div>
       </nav>
@@ -81,7 +91,7 @@ const App: React.FC = () => {
       </section>
 
       {/* Impact Section */}
-      <section id="impact" className="py-24 px-8">
+      <section id="impact" className="py-24 px-8 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-baseline justify-between mb-20">
             <h2 className="text-5xl md:text-7xl font-bold tracking-tighter font-display">Product Impact</h2>
@@ -126,7 +136,7 @@ const App: React.FC = () => {
       </section>
 
       {/* Career Section */}
-      <section id="experience" className="py-24 px-8">
+      <section id="experience" className="py-24 px-8 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="mb-20">
             <h2 className="text-5xl md:text-7xl font-bold tracking-tighter mb-4 font-display">Career History</h2>
@@ -169,12 +179,11 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* About Section - Rebalanced Triple Column Layout */}
-      <section id="skills" className="py-24 px-8">
+      {/* About Section */}
+      <section id="skills" className="py-24 px-8 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 lg:gap-12">
             
-            {/* Column 1: Expertise */}
             <div className="space-y-10">
               <div className="flex items-center gap-3">
                 <Briefcase size={18} className="text-indigo-500" />
@@ -189,7 +198,6 @@ const App: React.FC = () => {
               </div>
             </div>
 
-            {/* Column 2: Academic Background */}
             <div className="space-y-10">
               <div className="flex items-center gap-3">
                 <GraduationCap size={18} className="text-indigo-500" />
@@ -211,7 +219,6 @@ const App: React.FC = () => {
               </div>
             </div>
 
-            {/* Column 3: Recognition */}
             <div className="space-y-10">
               <div className="flex items-center gap-3">
                 <Trophy size={18} className="text-indigo-500" />
@@ -234,7 +241,7 @@ const App: React.FC = () => {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-64 px-8 text-center relative">
+      <section id="contact" className="py-64 px-8 text-center relative z-20">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-5xl md:text-8xl font-black mb-12 tracking-tighter leading-[0.9] font-display">
             Let’s Build <br />
@@ -245,23 +252,29 @@ const App: React.FC = () => {
           </p>
           
           <div className="flex flex-col md:flex-row items-center justify-center gap-10 mb-24">
-            <a href={`mailto:${PROFILE.email}?body=${emailBody}`} className="px-14 py-6 bg-white text-black rounded-full font-bold text-xl hover:bg-indigo-600 hover:text-white transition-all flex items-center gap-5 shadow-2xl shadow-indigo-500/10">
+            <button 
+              onClick={handleEmail} 
+              className="px-14 py-6 bg-white text-black rounded-full font-bold text-xl hover:bg-indigo-600 hover:text-white transition-all flex items-center gap-5 shadow-2xl shadow-indigo-500/10 cursor-pointer relative z-30"
+            >
               <Send size={24} /> Start Conversation
-            </a>
-            <a href={`tel:${PROFILE.phone}`} className="text-zinc-500 hover:text-white font-bold text-xl transition-colors">
+            </button>
+            <button 
+              onClick={handleCall} 
+              className="text-zinc-500 hover:text-white font-bold text-xl transition-colors cursor-pointer relative z-30"
+            >
               Call Now
-            </a>
+            </button>
           </div>
           
           <div className="flex justify-center items-center gap-14 text-zinc-700">
-            <a href="https://www.linkedin.com/in/rushikulkarni" target="_blank" className="hover:text-white transition-all hover:scale-110 font-bold uppercase tracking-[0.4em] text-[10px]">LinkedIn</a>
-            <a href="https://github.com/Rushi-Kulkarni-NIT-Trichy" target="_blank" className="hover:text-white transition-all hover:scale-110 font-bold uppercase tracking-[0.4em] text-[10px]">GitHub</a>
+            <a href="https://www.linkedin.com/in/rushikulkarni" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-all hover:scale-110 font-bold uppercase tracking-[0.4em] text-[10px] cursor-pointer">LinkedIn</a>
+            <a href="https://github.com/Rushi-Kulkarni-NIT-Trichy" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-all hover:scale-110 font-bold uppercase tracking-[0.4em] text-[10px] cursor-pointer">GitHub</a>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-20 border-t border-white/[0.03] text-center text-zinc-900 text-[10px] font-bold uppercase tracking-[0.6em]">
+      <footer className="py-20 border-t border-white/[0.03] text-center text-zinc-900 text-[10px] font-bold uppercase tracking-[0.6em] relative z-10">
         <div className="max-w-7xl mx-auto px-8">
           <p>© {new Date().getFullYear()} {PROFILE.name} | ASSOCIATE PRODUCT MANAGER</p>
         </div>

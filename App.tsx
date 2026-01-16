@@ -195,7 +195,7 @@ const App: React.FC = () => {
       </nav>
 
       {/* Modern High-End Hero Section */}
-      <header className="min-h-screen flex items-center px-8 md:px-16 pt-32 pb-20 relative overflow-hidden bg-grid-subtle">
+      <header className="min-h-screen flex items-center px-8 md:px-16 pt-32 pb-12 relative overflow-hidden bg-grid-subtle">
         <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
           <div className="lg:col-span-7 reveal text-left z-10 order-2 lg:order-1">
@@ -242,7 +242,7 @@ const App: React.FC = () => {
       </header>
 
       {/* Impact Section */}
-      <section id="impact" className="py-24 px-8 max-w-7xl mx-auto">
+      <section id="impact" className="pt-12 pb-24 px-8 max-w-7xl mx-auto">
         <div className="reveal mb-12 flex justify-between items-end border-b border-white/5 pb-10">
           <h2 className="text-3xl md:text-6xl font-black tracking-tighter font-display uppercase">Product Impact</h2>
           <p className="text-[10px] font-bold text-zinc-600 uppercase tracking-[0.4em] mb-3">Case Studies</p>

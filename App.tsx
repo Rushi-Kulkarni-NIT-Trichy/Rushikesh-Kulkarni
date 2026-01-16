@@ -178,18 +178,18 @@ const App: React.FC = () => {
       </div>
 
       {/* Modern Navigation */}
-      <nav className={`fixed top-8 left-1/2 -translate-x-1/2 z-[100] transition-all duration-700 ${scrolled ? 'scale-90 translate-y-[-10px]' : 'scale-100'}`}>
-        <div className="flex items-center gap-1.5 p-1.5 bg-black/80 backdrop-blur-3xl border border-white/5 rounded-full shadow-2xl">
-          <div className="px-4 text-sm font-black font-display tracking-tighter mr-2">RK<span className="text-indigo-500">.</span></div>
-          <div className="flex items-center gap-1">
+      <nav className={`fixed top-8 left-1/2 -translate-x-1/2 z-[100] w-max max-w-[95vw] transition-all duration-700 ${scrolled ? 'scale-90 translate-y-[-10px]' : 'scale-100'}`}>
+        <div className="flex items-center gap-1 md:gap-1.5 p-1 bg-black/80 backdrop-blur-3xl border border-white/5 rounded-full shadow-2xl overflow-hidden">
+          <div className="px-2 md:px-4 text-xs md:text-sm font-black font-display tracking-tighter shrink-0">RK<span className="text-indigo-500">.</span></div>
+          <div className="flex items-center gap-0.5 md:gap-1">
             {['impact', 'experience', 'about'].map(id => (
-              <button key={id} onClick={() => scrollTo(id)} className={`px-4 md:px-6 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all duration-300 ${activeTab === id ? 'bg-white text-black' : 'text-zinc-500 hover:text-white'}`}>{id}</button>
+              <button key={id} onClick={() => scrollTo(id)} className={`px-2.5 md:px-5 py-2 md:py-2.5 rounded-full text-[9px] md:text-[10px] font-bold uppercase tracking-widest transition-all duration-300 ${activeTab === id ? 'bg-white text-black' : 'text-zinc-500 hover:text-white'}`}>{id}</button>
             ))}
           </div>
-          <div className="w-px h-4 bg-white/10 mx-2"></div>
-          <div className="flex items-center gap-1.5">
-            <a href="https://drive.google.com/file/d/1i_17HM-L9-pl8qSnPu7GuyLUgTfxgsv3/view?usp=drive_link" target="_blank" className="hidden sm:flex px-4 md:px-6 py-2.5 bg-zinc-900 hover:bg-zinc-800 text-white border border-white/5 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all items-center gap-2">Resume <Download size={14} /></a>
-            <a href={gmailComposeUrlHeader} target="_blank" className="px-4 md:px-6 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-full text-[10px] font-bold uppercase tracking-widest transition-all shadow-lg active:scale-95">Hire Me</a>
+          <div className="w-px h-4 bg-white/10 mx-1 md:mx-2 shrink-0"></div>
+          <div className="flex items-center gap-1 md:gap-1.5">
+            <a href="https://drive.google.com/file/d/1i_17HM-L9-pl8qSnPu7GuyLUgTfxgsv3/view?usp=drive_link" target="_blank" className="hidden sm:flex px-4 md:px-5 py-2 md:py-2.5 bg-zinc-900 hover:bg-zinc-800 text-white border border-white/5 rounded-full text-[9px] md:text-[10px] font-bold uppercase tracking-widest transition-all items-center gap-2">Resume <Download size={14} /></a>
+            <a href={gmailComposeUrlHeader} target="_blank" className="px-3 md:px-6 py-2 md:py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-full text-[9px] md:text-[10px] font-bold uppercase tracking-widest transition-all shadow-[0_0_20px_rgba(99,102,241,0.3)] hover:shadow-[0_0_30px_rgba(99,102,241,0.5)] active:scale-95 whitespace-nowrap">Hire Me</a>
           </div>
         </div>
       </nav>

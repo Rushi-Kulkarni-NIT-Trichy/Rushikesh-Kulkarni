@@ -104,6 +104,8 @@ const App: React.FC = () => {
   const [activeCareerIndex, setActiveCareerIndex] = useState(0);
   const [railProgress, setRailProgress] = useState(0);
   const [selectedProject, setSelectedProject] = useState<any>(null);
+  const [name, setName] = useState('');
+  const [message, setMessage] = useState('');
   const scrollTicking = useRef(false);
   const experienceRef = useRef<HTMLElement>(null);
 
@@ -156,7 +158,14 @@ const App: React.FC = () => {
     if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
   };
 
-  const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=nittrichy.rushi@gmail.com&su=Reaching%20out%20from%20Portfolio&body=Hey%20Rushikesh%20%2C%0A%0AI%20saw%20your%20portfolio%20%2C%20I%20am%20reaching%20out%20to%20connect%20with%20you.%20%0A%0ARegards%2C`;
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name.trim() || !message.trim()) return;
+    const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=nittrichy.rushi@gmail.com&su=Message%20from%20${encodeURIComponent(name)}&body=${encodeURIComponent(message)}`;
+    window.open(gmailComposeUrl, '_blank');
+  };
+
+  const gmailComposeUrlHeader = `https://mail.google.com/mail/?view=cm&fs=1&to=nittrichy.rushi@gmail.com&su=Reaching%20out%20from%20Portfolio&body=Hey%20Rushikesh%20%2C%0A%0AI%20saw%20your%20portfolio%20%2C%20I%20am%20reaching%20out%20to%20connect%20with%20you.%20%0A%0ARegards%2C`;
 
   return (
     <div className="min-h-screen text-white bg-black selection:bg-indigo-500/40">
@@ -180,7 +189,7 @@ const App: React.FC = () => {
           <div className="w-px h-4 bg-white/10 mx-2"></div>
           <div className="flex items-center gap-1.5">
             <a href="https://drive.google.com/file/d/1i_17HM-L9-pl8qSnPu7GuyLUgTfxgsv3/view?usp=drive_link" target="_blank" className="hidden sm:flex px-4 md:px-6 py-2.5 bg-zinc-900 hover:bg-zinc-800 text-white border border-white/5 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all items-center gap-2">Resume <Download size={14} /></a>
-            <a href={gmailComposeUrl} target="_blank" className="px-4 md:px-6 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-full text-[10px] font-bold uppercase tracking-widest transition-all shadow-lg active:scale-95">Hire Me</a>
+            <a href={gmailComposeUrlHeader} target="_blank" className="px-4 md:px-6 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-full text-[10px] font-bold uppercase tracking-widest transition-all shadow-lg active:scale-95">Hire Me</a>
           </div>
         </div>
       </nav>
@@ -347,19 +356,32 @@ const App: React.FC = () => {
                   <span>9488177320</span>
                 </a>
               </div>
-              <a href={gmailComposeUrl} target="_blank" className="inline-block px-8 py-5 bg-white text-black rounded-xl font-bold tracking-widest text-[11px] md:text-[13px] uppercase hover:bg-indigo-600 hover:text-white transition-all text-center w-full shadow-xl">
+              <a href={gmailComposeUrlHeader} target="_blank" className="inline-block px-8 py-5 bg-white text-black rounded-xl font-bold tracking-widest text-[11px] md:text-[13px] uppercase hover:bg-indigo-600 hover:text-white transition-all text-center w-full shadow-xl">
                 Email Me @ nittrichy.rushi@gmail.com
               </a>
             </div>
           </div>
           <div className="md:w-1/2 w-full glass-card p-10 rounded-[2.5rem] border-white/5">
-            <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-              <div className="grid grid-cols-2 gap-4">
-                <input type="text" placeholder="Name" className="bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-indigo-500 transition-all text-sm" />
-                <input type="email" placeholder="Email" className="bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-indigo-500 transition-all text-sm" />
+            <form className="space-y-6" onSubmit={handleFormSubmit}>
+              <div className="grid grid-cols-1 gap-4">
+                <input 
+                  type="text" 
+                  placeholder="Name" 
+                  required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-indigo-500 transition-all text-sm" 
+                />
               </div>
-              <textarea placeholder="Your Message" rows={4} className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-indigo-500 transition-all text-sm resize-none"></textarea>
-              <button className="w-full py-4 bg-white text-black rounded-2xl font-bold tracking-widest uppercase text-sm hover:bg-indigo-600 hover:text-white transition-all flex items-center justify-center gap-3">Send Message <Send size={18} /></button>
+              <textarea 
+                placeholder="Your Message" 
+                rows={4} 
+                required
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-indigo-500 transition-all text-sm resize-none"
+              ></textarea>
+              <button type="submit" className="w-full py-4 bg-white text-black rounded-2xl font-bold tracking-widest uppercase text-sm hover:bg-indigo-600 hover:text-white transition-all flex items-center justify-center gap-3">Send Message <Send size={18} /></button>
             </form>
           </div>
         </div>
@@ -370,7 +392,7 @@ const App: React.FC = () => {
           <p className="text-[10px] font-black uppercase tracking-[0.5em] text-zinc-900">© {new Date().getFullYear()} Rushikesh Kulkarni</p>
           <div className="flex gap-10">
             <a href="https://drive.google.com/file/d/1i_17HM-L9-pl8qSnPu7GuyLUgTfxgsv3/view?usp=drive_link" target="_blank" className="text-[10px] font-black uppercase tracking-[0.5em] text-zinc-800 hover:text-white transition-colors flex items-center gap-2">Resume <Download size={14} /></a>
-            <a href={gmailComposeUrl} target="_blank" className="text-[10px] font-black uppercase tracking-[0.5em] text-zinc-800 hover:text-white transition-colors">Contact</a>
+            <a href={gmailComposeUrlHeader} target="_blank" className="text-[10px] font-black uppercase tracking-[0.5em] text-zinc-800 hover:text-white transition-colors">Contact</a>
           </div>
         </div>
       </footer>

@@ -86,7 +86,7 @@ export const PROJECTS: ImpactProject[] = [
   {
     title: "GenAI Visual Filters",
     description: "Launched visual filters across high-traffic listing pages and search results to reflect how users actually shop, driving a 10% buyer adoption and 5.3% conversion uplift.",
-    metrics: ["+5.3% Conversion Uplift", "-25% Exit Rate", "10% Buyer Adoption"],
+    metrics: ["+5.3% Conversion Uplift", "-20% Exit Rate", "10% Buyer Adoption"],
     tags: ["Visual Filters", "Discovery", "GenAI Tagging"],
     caseStudy: {
       goalTitle: "Faster, Smarter Product Discovery",

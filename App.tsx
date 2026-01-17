@@ -12,7 +12,7 @@ const useScrollReveal = (dependency: any) => {
         }
       });
     }, { 
-      threshold: 0.05,
+      threshold: 0.05, 
       rootMargin: "0px 0px -5% 0px" 
     });
 
@@ -119,6 +119,11 @@ const App: React.FC = () => {
 
   useScrollReveal(currentView);
 
+  // Scroll to top whenever the view changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentView]);
+
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
     if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
@@ -168,7 +173,7 @@ const App: React.FC = () => {
 
   const handleBackToPortfolio = () => {
     setCurrentView('main');
-    // Allow React to render the main view first, then scroll
+    // Allow React to render the main view first, then scroll to the specific section
     setTimeout(() => {
       scrollTo('impact');
     }, 50);

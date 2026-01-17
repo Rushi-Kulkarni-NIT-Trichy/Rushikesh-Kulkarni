@@ -125,15 +125,6 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
-    if (currentView === 'main') {
-        // We don't necessarily want to scroll to top every time we come back to main
-        // unless it's a fresh load.
-    } else {
-        window.scrollTo(0, 0);
-    }
-  }, [currentView]);
-
-  useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 40);
       const sections = ['impact', 'experience', 'about'];
@@ -218,6 +209,13 @@ const App: React.FC = () => {
           </div>
           <div className="w-px h-4 bg-white/10 mx-2 shrink-0"></div>
           <div className="flex items-center gap-1.5">
+            <a 
+              href="https://drive.google.com/file/d/1i_17HM-L9-pl8qSnPu7GuyLUgTfxgsv3/view?usp=drive_link" 
+              target="_blank" 
+              className="flex items-center gap-2 px-5 py-2.5 bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 text-zinc-400 hover:text-white rounded-full text-[10px] font-bold uppercase tracking-widest transition-all whitespace-nowrap"
+            >
+              Resume <Download size={12} className="opacity-60" />
+            </a>
             <a href={gmailComposeUrlHeader} target="_blank" className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-full text-[10px] font-bold uppercase tracking-widest transition-all shadow-lg whitespace-nowrap">Hire Me</a>
           </div>
         </div>

@@ -20,8 +20,9 @@ const N8NNode: React.FC<{
   type: 'trigger' | 'ai' | 'db' | 'logic' | 'live' | 'analytics';
   active?: boolean;
   onClick?: () => void;
+  className?: string;
   style?: React.CSSProperties;
-}> = ({ title, subTitle, icon, type, active, onClick, style }) => {
+}> = ({ title, subTitle, icon, type, active, onClick, style, className = "" }) => {
   const getColors = () => {
     switch(type) {
       case 'trigger': return 'border-[#ff6d5a] text-[#ff6d5a]';
@@ -49,10 +50,10 @@ const N8NNode: React.FC<{
   return (
     <div 
       onClick={onClick}
-      className={`absolute transition-all duration-500 cursor-pointer ${active ? 'scale-105 z-50' : 'hover:scale-105 z-10'}`}
+      className={`${className} transition-all duration-500 cursor-pointer ${active ? 'scale-105 z-50' : 'hover:scale-105 z-10'}`}
       style={style}
     >
-      <div className={`relative w-[220px] min-h-[85px] bg-[#141414] rounded-xl border-2 p-4 flex flex-col justify-center transition-all duration-300 shadow-2xl
+      <div className={`relative w-full md:w-[220px] min-h-[85px] bg-[#141414] rounded-xl border-2 p-4 flex flex-col justify-center transition-all duration-300 shadow-2xl
         ${getColors()} ${active ? 'shadow-[0_0_40px_-10px_currentColor] border-opacity-100 bg-[#1a1a1a]' : 'border-opacity-30 hover:border-opacity-100'}
       `}>
         <div className="flex items-center gap-3 mb-2">
@@ -90,12 +91,13 @@ const N8NCanvas: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-[850px] bg-[#0a0a0a] rounded-[3rem] border border-white/5 overflow-hidden shadow-2xl">
+    <div className="relative w-full h-auto md:h-[850px] bg-[#0a0a0a] rounded-[2rem] md:rounded-[3rem] border border-white/5 overflow-hidden shadow-2xl p-6 md:p-0">
       {/* n8n Dotted Grid */}
       <div className="absolute inset-0 opacity-[0.2] pointer-events-none" 
            style={{ backgroundImage: 'radial-gradient(circle, #444 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
       
-      <svg className="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+      {/* Desktop Connectors */}
+      <svg className="hidden md:block absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <filter id="glow">
             <feGaussianBlur stdDeviation="3" result="blur" />
@@ -103,7 +105,6 @@ const N8NCanvas: React.FC = () => {
           </filter>
         </defs>
 
-        {/* SUBGRAPH LABELS */}
         <text x="60" y="60" className="text-[10px] font-black fill-[#ff6d5a] uppercase tracking-[0.5em] opacity-50">Creative Factory (Production)</text>
         <rect x="40" y="80" width="940" height="280" rx="40" fill="none" stroke="#ff6d5a" strokeWidth="1" strokeDasharray="10 10" opacity="0.1" />
 
@@ -117,7 +118,6 @@ const N8NCanvas: React.FC = () => {
 
         {/* Connection D to E (approved assets) */}
         <path d="M 990 240 Q 1030 240, 1030 380 Q 1030 520, 990 520" stroke="#1565c0" strokeWidth="3" strokeDasharray="8 4" fill="none" opacity="0.4" />
-        <text x="1040" y="380" transform="rotate(90 1040 380)" className="text-[8px] font-bold fill-[#1565c0] uppercase tracking-[0.2em]">Approved Assets Deployment</text>
 
         {/* CONNECTIONS: Live Ops Loop */}
         <path d="M 770 520 H 700" stroke="white" strokeWidth="2" strokeOpacity="0.1" />
@@ -134,57 +134,81 @@ const N8NCanvas: React.FC = () => {
         </circle>
       </svg>
 
-      {/* NODES: Creative Factory */}
-      <N8NNode 
-        title="Start Merch Template" subTitle="🚀 Demand Entry Point" icon={<Rocket />} 
-        type="trigger" style={{ left: '60px', top: '155px' }} 
-        active={activeStep === 0}
-      />
-      <N8NNode 
-        title="Gemini Flash" subTitle="🤖 Prompt Engineer" icon={<MessageSquareText />} 
-        type="ai" style={{ left: '330px', top: '155px' }} 
-        active={activeStep === 1}
-      />
-      <N8NNode 
-        title="Gemini Pro Vision 3" subTitle="🎨 Asset Generation" icon={<Sparkles />} 
-        type="ai" style={{ left: '620px', top: '155px' }} 
-        active={activeStep === 2}
-      />
-      <N8NNode 
-        title="Content Bank" subTitle="🗄️ Human Approval Gate" icon={<UserCheck />} 
-        type="db" style={{ left: '910px', top: '155px' }} 
-        active={activeStep === 3}
-      />
+      {/* STACKED LAYOUT (RESPONSIVE) */}
+      <div className="flex flex-col md:block gap-2 relative z-10 h-full">
+        {/* Loop 1: Factory */}
+        <div className="md:hidden text-[10px] font-black uppercase tracking-[0.5em] text-[#ff6d5a] opacity-50 mb-4 mt-4 text-center">Creative Factory</div>
+        
+        <div className="flex flex-col items-center md:block">
+          <N8NNode 
+            title="Start Merch Template" subTitle="🚀 Demand Entry Point" icon={<Rocket />} 
+            type="trigger" className="md:absolute w-full" style={{ left: '60px', top: '155px' }} 
+            active={activeStep === 0}
+          />
+          <ArrowDown size={16} className="md:hidden text-[#ff6d5a] my-2 opacity-50" />
+          <N8NNode 
+            title="Gemini Flash" subTitle="🤖 Prompt Engineer" icon={<MessageSquareText />} 
+            type="ai" className="md:absolute w-full" style={{ left: '330px', top: '155px' }} 
+            active={activeStep === 1}
+          />
+          <ArrowDown size={16} className="md:hidden text-[#9c27b0] my-2 opacity-50" />
+          <N8NNode 
+            title="Gemini Pro Vision 3" subTitle="🎨 Asset Generation" icon={<Sparkles />} 
+            type="ai" className="md:absolute w-full" style={{ left: '620px', top: '155px' }} 
+            active={activeStep === 2}
+          />
+          <ArrowDown size={16} className="md:hidden text-[#9c27b0] my-2 opacity-50" />
+          <N8NNode 
+            title="Content Bank" subTitle="🗄️ Human Approval Gate" icon={<UserCheck />} 
+            type="db" className="md:absolute w-full" style={{ left: '910px', top: '155px' }} 
+            active={activeStep === 3}
+          />
+        </div>
 
-      {/* NODES: Live Operations */}
-      <N8NNode 
-        title="Banner Selector Agent" subTitle="🧠 Smart Filters Logic" icon={<Search />} 
-        type="logic" style={{ left: '800px', top: '475px' }} 
-        active={activeStep === 4}
-      />
-      <N8NNode 
-        title="Promotion & Page APIs" subTitle="🔌 Deployment Engine" icon={<RotateCw />} 
-        type="logic" style={{ left: '510px', top: '475px' }} 
-        active={activeStep === 5}
-      />
-      <N8NNode 
-        title="LIVE Homepage Slots" subTitle="🟢 User Interaction" icon={<Monitor />} 
-        type="live" style={{ left: '220px', top: '475px' }} 
-        active={activeStep === 6}
-      />
-      <N8NNode 
-        title="BigQuery" subTitle="📊 Performance Tracking" icon={<LineChart />} 
-        type="analytics" style={{ left: '220px', top: '635px' }} 
-        active={activeStep === 7}
-      />
-      <N8NNode 
-        title="Auto-Reranking Engine" subTitle="🔄 4-Hour Optimization" icon={<RefreshCw />} 
-        type="analytics" style={{ left: '800px', top: '635px' }} 
-        active={activeStep === 8}
-      />
+        <div className="md:hidden h-px bg-white/10 my-10 relative">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#0a0a0a] px-4">
+             <ChevronRight className="rotate-90 text-[#1565c0]" size={20} />
+          </div>
+        </div>
+
+        {/* Loop 2: Live Ops */}
+        <div className="md:hidden text-[10px] font-black uppercase tracking-[0.5em] text-[#1565c0] opacity-50 mb-4 text-center">Live Operations</div>
+        
+        <div className="flex flex-col items-center md:block">
+          <N8NNode 
+            title="Banner Selector Agent" subTitle="🧠 Smart Filters Logic" icon={<Search />} 
+            type="logic" className="md:absolute w-full" style={{ left: '800px', top: '475px' }} 
+            active={activeStep === 4}
+          />
+          <ArrowDown size={16} className="md:hidden text-[#455a64] my-2 opacity-50" />
+          <N8NNode 
+            title="Promotion & Page APIs" subTitle="🔌 Deployment Engine" icon={<RotateCw />} 
+            type="logic" className="md:absolute w-full" style={{ left: '510px', top: '475px' }} 
+            active={activeStep === 5}
+          />
+          <ArrowDown size={16} className="md:hidden text-[#455a64] my-2 opacity-50" />
+          <N8NNode 
+            title="LIVE Homepage Slots" subTitle="🟢 User Interaction" icon={<Monitor />} 
+            type="live" className="md:absolute w-full" style={{ left: '220px', top: '475px' }} 
+            active={activeStep === 6}
+          />
+          <ArrowDown size={16} className="md:hidden text-[#2e7d32] my-2 opacity-50" />
+          <N8NNode 
+            title="BigQuery" subTitle="📊 Performance Tracking" icon={<LineChart />} 
+            type="analytics" className="md:absolute w-full" style={{ left: '220px', top: '635px' }} 
+            active={activeStep === 7}
+          />
+          <ArrowDown size={16} className="md:hidden text-[#ef6c00] my-2 opacity-50" />
+          <N8NNode 
+            title="Auto-Reranking Engine" subTitle="🔄 4-Hour Optimization" icon={<RefreshCw />} 
+            type="analytics" className="md:absolute w-full" style={{ left: '800px', top: '635px' }} 
+            active={activeStep === 8}
+          />
+        </div>
+      </div>
 
       {/* Legend & Interface Overlays */}
-      <div className="absolute bottom-10 left-12 flex items-center gap-6 bg-black/40 backdrop-blur-xl border border-white/5 px-6 py-3 rounded-2xl">
+      <div className="absolute bottom-10 left-12 hidden md:flex items-center gap-6 bg-black/40 backdrop-blur-xl border border-white/5 px-6 py-3 rounded-2xl">
          <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-[#ff6d5a] animate-pulse"></div>
             <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500">Live Simulation</span>

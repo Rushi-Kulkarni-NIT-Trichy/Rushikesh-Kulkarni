@@ -279,17 +279,22 @@ const CaseStudy: React.FC<CaseStudyProps> = ({ project, onBack }) => {
               <h2 className="text-2xl md:text-5xl font-black font-display tracking-tight uppercase leading-none text-white">Business Outcomes</h2>
             </div>
             <div className="lg:col-span-8">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
-                {project.metrics.map((metric, i) => (
-                  <div key={i} className="glass-card p-10 rounded-[2.5rem] border-white/5 bg-zinc-950/40 hover:border-indigo-500/30 transition-all group">
-                    <div className="text-4xl md:text-6xl font-black text-white mb-3 font-display tracking-tighter group-hover:scale-105 transition-transform origin-left">
-                      {metric.split(' ')[0]}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
+                {project.metrics.filter(m => !isPDA || m.includes('Cr/month')).map((metric, i) => {
+                  const isCrMonth = metric.includes('Cr/month');
+                  return (
+                    <div key={i} className={`glass-card p-10 rounded-[2.5rem] border-white/5 bg-zinc-950/40 hover:border-indigo-500/30 transition-all group ${isCrMonth ? 'sm:col-span-2' : ''}`}>
+                      <div className={`font-black text-white mb-3 font-display tracking-tighter group-hover:scale-105 transition-transform origin-left whitespace-nowrap ${isCrMonth ? 'text-4xl md:text-6xl lg:text-7xl' : 'text-4xl md:text-6xl'}`}>
+                        {isCrMonth ? metric.replace(' potential', '') : metric.split(' ')[0]}
+                      </div>
+                      {!isCrMonth && (
+                        <div className="text-zinc-300 text-[11px] font-bold uppercase tracking-widest leading-tight">
+                          {metric.split(' ').slice(1).join(' ')}
+                        </div>
+                      )}
                     </div>
-                    <div className="text-zinc-300 text-[11px] font-bold uppercase tracking-widest leading-tight">
-                      {metric.split(' ').slice(1).join(' ')}
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           </div>

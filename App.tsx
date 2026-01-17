@@ -390,8 +390,8 @@ const App: React.FC = () => {
                   <span>9488177320</span>
                 </a>
               </div>
-              <a href={gmailComposeUrlHeader} target="_blank" className="inline-block px-8 py-5 bg-white text-black rounded-xl font-bold tracking-widest text-[11px] md:text-[13px] uppercase hover:bg-indigo-600 hover:text-white transition-all text-center w-full shadow-xl">
-                Email Me @ nittrichy.rushi@gmail.com
+              <a href={gmailComposeUrlHeader} target="_blank" className="inline-block px-8 py-5 bg-white text-black rounded-xl font-bold tracking-widest text-[11px] md:text-[13px] hover:bg-indigo-600 hover:text-white transition-all text-center w-full shadow-xl">
+                <span className="uppercase">EMAIL ME</span> @ <span className="lowercase">nittrichy.rushi@gmail.com</span>
               </a>
             </div>
           </div>

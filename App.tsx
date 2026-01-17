@@ -121,6 +121,8 @@ const App: React.FC = () => {
 
   const gmailComposeUrlHeader = `https://mail.google.com/mail/?view=cm&fs=1&to=nittrichy.rushi@gmail.com&su=Reaching%20out%20from%20Portfolio&body=Hey%20Rushikesh%20%2C%0A%0AI%20saw%20your%20portfolio%20%2C%20I%20am%20reaching%20out%20to%20connect%20with%20you.%20%0A%0ARegards%2C`;
 
+  const RESUME_LINK = "https://drive.google.com/file/d/1oyjWuzTJyDAR_A-Fu4Wt8QzsGl1GT5Uv/view?usp=sharing";
+
   if (currentView === 'ai-case-study') {
     return <AICaseStudy onBack={handleBackToPortfolio} />;
   }
@@ -159,7 +161,7 @@ const App: React.FC = () => {
           
           <div className="flex items-center gap-0.5 md:gap-1">
             <a 
-              href="https://drive.google.com/file/d/1i_17HM-L9-pl8qSnPu7GuyLUgTfxgsv3/view?usp=drive_link" 
+              href={RESUME_LINK} 
               target="_blank" 
               className="flex items-center gap-1.5 px-2.5 md:px-5 py-2 md:py-2.5 bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 text-zinc-400 hover:text-white rounded-full text-[8px] md:text-[10px] font-bold uppercase tracking-widest transition-all"
             >
@@ -423,7 +425,7 @@ const App: React.FC = () => {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
           <p className="text-[10px] font-black uppercase tracking-[0.5em] text-zinc-900">© {new Date().getFullYear()} Rushikesh Kulkarni</p>
           <div className="flex gap-10">
-            <a href="https://drive.google.com/file/d/1i_17HM-L9-pl8qSnPu7GuyLUgTfxgsv3/view?usp=drive_link" target="_blank" className="text-[10px] font-black uppercase tracking-[0.5em] text-zinc-800 hover:text-white transition-colors flex items-center gap-2">Resume <Download size={14} /></a>
+            <a href={RESUME_LINK} target="_blank" className="text-[10px] font-black uppercase tracking-[0.5em] text-zinc-800 hover:text-white transition-colors flex items-center gap-2">Resume <Download size={14} /></a>
             <a href={gmailComposeUrlHeader} target="_blank" className="text-[10px] font-black uppercase tracking-[0.5em] text-zinc-800 hover:text-white transition-colors">Contact</a>
           </div>
         </div>

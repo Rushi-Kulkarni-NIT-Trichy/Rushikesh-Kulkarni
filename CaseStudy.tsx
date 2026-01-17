@@ -96,6 +96,8 @@ const CaseStudy: React.FC<CaseStudyProps> = ({ project, onBack }) => {
 
   const isAIProject = project.title.toLowerCase().includes('agentic');
 
+  const RESUME_LINK = "https://drive.google.com/file/d/1oyjWuzTJyDAR_A-Fu4Wt8QzsGl1GT5Uv/view?usp=sharing";
+
   return (
     <div className="min-h-screen text-white bg-black selection:bg-indigo-500/40 font-sans overflow-x-hidden">
       <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
@@ -334,7 +336,7 @@ const CaseStudy: React.FC<CaseStudyProps> = ({ project, onBack }) => {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
           <p className="text-[10px] font-black uppercase tracking-[0.5em] text-zinc-900">© {new Date().getFullYear()} Rushikesh Kulkarni</p>
           <div className="flex gap-10">
-            <a href="https://drive.google.com/file/d/1i_17HM-L9-pl8qSnPu7GuyLUgTfxgsv3/view?usp=drive_link" target="_blank" className="text-[10px] font-black uppercase tracking-[0.5em] text-zinc-800 hover:text-white transition-colors flex items-center gap-2">Resume <Download size={14} /></a>
+            <a href={RESUME_LINK} target="_blank" className="text-[10px] font-black uppercase tracking-[0.5em] text-zinc-800 hover:text-white transition-colors flex items-center gap-2">Resume <Download size={14} /></a>
             <button onClick={onBack} className="text-[10px] font-black uppercase tracking-[0.5em] text-zinc-800 hover:text-white transition-colors">Portfolio</button>
             <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="text-[10px] font-black uppercase tracking-[0.5em] text-zinc-800 hover:text-white transition-colors">Back to Top</button>
           </div>

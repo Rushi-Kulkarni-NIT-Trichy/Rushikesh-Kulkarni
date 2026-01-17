@@ -119,7 +119,6 @@ const App: React.FC = () => {
 
   useScrollReveal(currentView);
 
-  // Scroll to top whenever the view changes
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [currentView]);
@@ -173,7 +172,6 @@ const App: React.FC = () => {
 
   const handleBackToPortfolio = () => {
     setCurrentView('main');
-    // Allow React to render the main view first, then scroll to the specific section
     setTimeout(() => {
       scrollTo('impact');
     }, 50);
@@ -196,14 +194,12 @@ const App: React.FC = () => {
     <div className="min-h-screen text-white bg-black selection:bg-indigo-500/40">
       <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
       
-      {/* Background Glows */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
         <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-indigo-500/[0.04] blur-[150px] rounded-full"></div>
         <div className="absolute top-[40%] right-[-10%] w-[50%] h-[50%] bg-blue-500/[0.03] blur-[150px] rounded-full"></div>
         <div className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-indigo-500/[0.03] blur-[150px] rounded-full"></div>
       </div>
 
-      {/* Modern Navigation */}
       <nav className={`fixed top-8 left-1/2 -translate-x-1/2 z-[100] w-max max-w-[95vw] transition-all duration-700 ${scrolled ? 'scale-90 translate-y-[-10px]' : 'scale-100'}`}>
         <div className="flex items-center gap-1.5 p-1 bg-black/80 backdrop-blur-3xl border border-white/5 rounded-full shadow-2xl overflow-hidden">
           <div className="px-4 text-sm font-black font-display tracking-tighter shrink-0">RK<span className="text-indigo-500">.</span></div>
@@ -226,28 +222,23 @@ const App: React.FC = () => {
         </div>
       </nav>
 
-      {/* Hero Section */}
       <header className="min-h-screen flex items-center px-8 md:px-16 pt-32 pb-8 relative overflow-hidden bg-grid-subtle">
         <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          
           <div className="lg:col-span-7 reveal text-left z-10 order-2 lg:order-1">
             <h1 className="text-6xl md:text-8xl xl:text-9xl font-black font-display tracking-tighter leading-[0.8] mb-12">
               <span className="block mb-2 text-transparent bg-clip-text bg-gradient-to-r from-white via-white/95 to-white/85">Rushikesh</span>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-200 via-zinc-300 to-white/70">Kulkarni</span>
             </h1>
-
             <div className="space-y-8 max-w-2xl">
               <p className="text-xl md:text-2xl font-display font-medium text-indigo-100/90 leading-snug">
                 Associate Product Manager @ Purplle. <br className="hidden md:block"/>
                 <span className="text-zinc-500">Designing the future of browse & discovery.</span>
               </p>
-              
               <p className="text-base md:text-lg text-zinc-400 leading-relaxed font-light">
                 NIT Trichy Alum with a focus on data-driven growth, AdTech monetization, and agentic AI workflows. I translate user intent into scalable business value.
               </p>
             </div>
           </div>
-
           <div className="lg:col-span-5 reveal flex justify-center lg:justify-end relative order-1 lg:order-2 mb-12 lg:mb-0">
             <div className="relative w-64 h-64 md:w-96 md:h-96 lg:w-[450px] lg:h-[450px]">
               <div className="w-full h-full rounded-full overflow-hidden p-1.5 bg-gradient-to-tr from-indigo-500/40 via-white/10 to-transparent border border-white/10 backdrop-blur-md relative z-10 shadow-[0_0_80px_-20px_rgba(99,102,241,0.3)] group">
@@ -267,13 +258,12 @@ const App: React.FC = () => {
         </div>
       </header>
 
-      {/* Impact Section */}
       <section id="impact" className="pt-12 pb-24 px-8 max-w-7xl mx-auto relative overflow-visible">
         <div className="reveal mb-12 flex flex-col md:flex-row justify-between items-start md:items-end border-b border-white/5 pb-10 gap-4">
           <h2 className="text-3xl md:text-5xl font-black tracking-tighter font-display leading-[0.8] uppercase text-transparent bg-clip-text bg-gradient-to-r from-white via-white/95 to-white/85">PRODUCT IMPACT</h2>
           <p className="text-[10px] font-bold text-zinc-600 uppercase tracking-[0.4em] mb-3 md:mb-5 shrink-0">Case Studies</p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {PROJECTS.map((project, idx) => (
             <div 
               key={idx} 
@@ -284,27 +274,52 @@ const App: React.FC = () => {
                   setSelectedProject(project);
                 }
               }} 
-              className="reveal group relative p-10 glass-card rounded-[2.5rem] hover:bg-zinc-900/40 transition-all duration-700 cursor-pointer border-transparent hover:border-indigo-500/20"
+              className="reveal group relative p-10 bg-zinc-950/40 border border-indigo-500/10 rounded-[2.5rem] hover:bg-indigo-500/[0.07] hover:border-indigo-500/40 transition-all duration-500 cursor-pointer overflow-hidden active:scale-[0.98] shadow-2xl hover:shadow-indigo-500/10"
             >
-              <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-100 transition-opacity duration-500 text-indigo-500"><ArrowUpRight size={32} /></div>
-              <div className="flex flex-wrap gap-2 mb-6">
-                {project.tags.map(tag => (
-                  <span key={tag} className="px-3 py-1 bg-white/5 rounded-full text-[9px] font-bold uppercase tracking-widest text-zinc-400 group-hover:text-indigo-400 transition-colors">{tag}</span>
-                ))}
-              </div>
-              <h3 className="text-3xl font-bold mb-4 font-display leading-tight group-hover:text-white transition-colors">{project.title}</h3>
-              <p className="text-zinc-500 text-base leading-relaxed mb-8 font-light line-clamp-2">{project.description}</p>
-              <div className="flex gap-4">
-                {project.metrics.slice(0, 1).map((m, i) => (
-                  <span key={i} className="text-sm font-black text-indigo-400 tracking-tighter uppercase">{m}</span>
-                ))}
+              {/* Tactical Button Overlay for the entire card */}
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.03] to-transparent pointer-events-none"></div>
+              
+              <div className="relative z-10">
+                <div className="flex justify-between items-start mb-6">
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.map(tag => (
+                      <span key={tag} className="px-3 py-1 bg-white/5 rounded-full text-[9px] font-bold uppercase tracking-widest text-zinc-400 group-hover:text-indigo-300 group-hover:bg-indigo-500/20 transition-all duration-300">{tag}</span>
+                    ))}
+                  </div>
+                  <div className="p-3 bg-indigo-500/5 rounded-2xl group-hover:bg-indigo-500/20 group-hover:text-white transition-all text-indigo-400 group-hover:rotate-12 transform">
+                    <ArrowUpRight size={24} />
+                  </div>
+                </div>
+
+                <h3 className="text-3xl font-bold mb-4 font-display leading-tight text-white group-hover:translate-x-1 transition-transform duration-300">
+                  {project.title}
+                </h3>
+
+                <p className="text-zinc-500 text-base leading-relaxed mb-10 font-light line-clamp-2 group-hover:text-zinc-300 transition-colors duration-300">
+                  {project.description}
+                </p>
+
+                <div className="flex items-center justify-between mt-auto pt-6 border-t border-white/5">
+                  <div className="flex flex-col">
+                    <span className="text-[9px] font-black uppercase tracking-widest text-zinc-600 mb-1">Key Outcome</span>
+                    {project.metrics.slice(0, 1).map((m, i) => (
+                      <span key={i} className="text-sm font-black text-indigo-400 tracking-tighter uppercase">
+                        {m}
+                      </span>
+                    ))}
+                  </div>
+                  
+                  {/* Visual Button Trigger */}
+                  <div className="px-5 py-2.5 bg-white/5 border border-white/10 rounded-full text-[10px] font-black uppercase tracking-widest text-zinc-400 group-hover:bg-indigo-500 group-hover:text-white group-hover:border-indigo-400 transition-all flex items-center gap-2">
+                    View Case <ChevronRight size={14} />
+                  </div>
+                </div>
               </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Experience Section */}
       <section id="experience" ref={experienceRef} className="py-16 px-8 max-w-6xl mx-auto relative overflow-visible">
         <div className="reveal mb-16">
           <h2 className="text-3xl md:text-5xl font-black tracking-tighter font-display leading-[0.8] uppercase text-transparent bg-clip-text bg-gradient-to-r from-white via-white/95 to-white/85">CAREER</h2>
@@ -321,12 +336,10 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* About Section */}
       <section id="about" className="py-16 px-8 max-w-7xl mx-auto relative overflow-visible">
         <div className="reveal mb-12 border-b border-white/5 pb-8">
           <h2 className="text-3xl md:text-5xl font-black tracking-tighter font-display leading-[0.8] uppercase text-transparent bg-clip-text bg-gradient-to-r from-white via-white/95 to-white/85">ABOUT</h2>
         </div>
-
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
           <div className="space-y-10">
             <div className="reveal space-y-4">
@@ -339,7 +352,6 @@ const App: React.FC = () => {
                 ))}
               </div>
             </div>
-            
             <div className="reveal space-y-4">
               <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-zinc-600">Education</h3>
               {EDUCATION.map((edu, idx) => (
@@ -354,7 +366,6 @@ const App: React.FC = () => {
               ))}
             </div>
           </div>
-
           <div className="reveal space-y-4">
             <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-zinc-600">Recognitions</h3>
             <div className="flex flex-col gap-2.5">
@@ -375,7 +386,6 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* Contact Section */}
       <section className="py-24 px-8 bg-zinc-950/20 relative overflow-hidden">
         <div className="reveal max-w-5xl mx-auto flex flex-col md:flex-row gap-16 items-start">
           <div className="md:w-1/2">

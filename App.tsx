@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Mail, Github, Linkedin, Send, GraduationCap, Briefcase, Trophy, Phone, ArrowUpRight, X, Calendar, Download, ChevronRight } from 'lucide-react';
 import { PROFILE, PROJECTS, EXPERIENCE, EDUCATION, AWARDS, SKILLS } from './constants';
+import CaseStudy from './CaseStudy';
 
-const useScrollReveal = () => {
+const useScrollReveal = (dependency: any) => {
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -15,9 +16,15 @@ const useScrollReveal = () => {
       rootMargin: "0px 0px -5% 0px" 
     });
 
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
+    const timer = setTimeout(() => {
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    }, 100);
+
+    return () => {
+      clearTimeout(timer);
+      observer.disconnect();
+    };
+  }, [dependency]);
 };
 
 const ProjectModal: React.FC<{ project: any; onClose: () => void }> = ({ project, onClose }) => {
@@ -26,7 +33,7 @@ const ProjectModal: React.FC<{ project: any; onClose: () => void }> = ({ project
     <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-8">
       <div className="absolute inset-0 bg-black/90 backdrop-blur-xl" onClick={onClose}></div>
       <div className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto glass-card rounded-[3rem] p-8 md:p-16 border-white/10 shadow-2xl animate-modal-in">
-        <button onClick={onClose} className="absolute top-8 right-8 text-zinc-500 hover:text-white transition-colors">
+        <button onClick={onClose} className="absolute top-8 right-8 text-zinc-500 hover:text-white transition-colors cursor-pointer">
           <X size={32} />
         </button>
         <div className="flex flex-wrap gap-2 mb-6">
@@ -99,6 +106,7 @@ const CareerItem: React.FC<{ exp: any; index: number; activeIndex: number }> = (
 };
 
 const App: React.FC = () => {
+  const [currentView, setCurrentView] = useState<'main' | 'case-study'>('main');
   const [scrolled, setScrolled] = useState(false);
   const [activeTab, setActiveTab] = useState('impact');
   const [activeCareerIndex, setActiveCareerIndex] = useState(0);
@@ -109,7 +117,21 @@ const App: React.FC = () => {
   const scrollTicking = useRef(false);
   const experienceRef = useRef<HTMLElement>(null);
 
-  useScrollReveal();
+  useScrollReveal(currentView);
+
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    if (currentView === 'main') {
+        // We don't necessarily want to scroll to top every time we come back to main
+        // unless it's a fresh load.
+    } else {
+        window.scrollTo(0, 0);
+    }
+  }, [currentView]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -153,9 +175,12 @@ const App: React.FC = () => {
     }, { passive: true });
   }, []);
 
-  const scrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
+  const handleBackToPortfolio = () => {
+    setCurrentView('main');
+    // Allow React to render the main view first, then scroll
+    setTimeout(() => {
+      scrollTo('impact');
+    }, 50);
   };
 
   const handleFormSubmit = (e: React.FormEvent) => {
@@ -167,41 +192,45 @@ const App: React.FC = () => {
 
   const gmailComposeUrlHeader = `https://mail.google.com/mail/?view=cm&fs=1&to=nittrichy.rushi@gmail.com&su=Reaching%20out%20from%20Portfolio&body=Hey%20Rushikesh%20%2C%0A%0AI%20saw%20your%20portfolio%20%2C%20I%20am%20reaching%20out%20to%20connect%20with%20you.%20%0A%0ARegards%2C`;
 
+  if (currentView === 'case-study') {
+    return <CaseStudy onBack={handleBackToPortfolio} />;
+  }
+
   return (
     <div className="min-h-screen text-white bg-black selection:bg-indigo-500/40">
       <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
       
-      {/* Dynamic Background */}
+      {/* Background Glows */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
-        <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-indigo-500/[0.04] blur-[150px] rounded-full transform-gpu"></div>
-        <div className="absolute bottom-[-5%] right-[-5%] w-[50%] h-[50%] bg-blue-500/[0.03] blur-[150px] rounded-full transform-gpu"></div>
+        <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-indigo-500/[0.04] blur-[150px] rounded-full"></div>
+        <div className="absolute top-[40%] right-[-10%] w-[50%] h-[50%] bg-blue-500/[0.03] blur-[150px] rounded-full"></div>
+        <div className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-indigo-500/[0.03] blur-[150px] rounded-full"></div>
       </div>
 
       {/* Modern Navigation */}
       <nav className={`fixed top-8 left-1/2 -translate-x-1/2 z-[100] w-max max-w-[95vw] transition-all duration-700 ${scrolled ? 'scale-90 translate-y-[-10px]' : 'scale-100'}`}>
-        <div className="flex items-center gap-1 md:gap-1.5 p-1 bg-black/80 backdrop-blur-3xl border border-white/5 rounded-full shadow-2xl overflow-hidden">
-          <div className="px-2 md:px-4 text-xs md:text-sm font-black font-display tracking-tighter shrink-0">RK<span className="text-indigo-500">.</span></div>
-          <div className="flex items-center gap-0.5 md:gap-1">
+        <div className="flex items-center gap-1.5 p-1 bg-black/80 backdrop-blur-3xl border border-white/5 rounded-full shadow-2xl overflow-hidden">
+          <div className="px-4 text-sm font-black font-display tracking-tighter shrink-0">RK<span className="text-indigo-500">.</span></div>
+          <div className="flex items-center gap-1">
             {['impact', 'experience', 'about'].map(id => (
-              <button key={id} onClick={() => scrollTo(id)} className={`px-2.5 md:px-5 py-2 md:py-2.5 rounded-full text-[9px] md:text-[10px] font-bold uppercase tracking-widest transition-all duration-300 ${activeTab === id ? 'bg-white text-black' : 'text-zinc-500 hover:text-white'}`}>{id}</button>
+              <button key={id} onClick={() => scrollTo(id)} className={`px-4 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all duration-300 ${activeTab === id ? 'bg-white text-black' : 'text-zinc-500 hover:text-white'}`}>{id}</button>
             ))}
           </div>
-          <div className="w-px h-4 bg-white/10 mx-1 md:mx-2 shrink-0"></div>
-          <div className="flex items-center gap-1 md:gap-1.5">
-            <a href="https://drive.google.com/file/d/1i_17HM-L9-pl8qSnPu7GuyLUgTfxgsv3/view?usp=drive_link" target="_blank" className="hidden sm:flex px-4 md:px-5 py-2 md:py-2.5 bg-zinc-900 hover:bg-zinc-800 text-white border border-white/5 rounded-full text-[9px] md:text-[10px] font-bold uppercase tracking-widest transition-all items-center gap-2">Resume <Download size={14} /></a>
-            <a href={gmailComposeUrlHeader} target="_blank" className="px-3 md:px-6 py-2 md:py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-full text-[9px] md:text-[10px] font-bold uppercase tracking-widest transition-all shadow-[0_0_20px_rgba(99,102,241,0.3)] hover:shadow-[0_0_30px_rgba(99,102,241,0.5)] active:scale-95 whitespace-nowrap">Hire Me</a>
+          <div className="w-px h-4 bg-white/10 mx-2 shrink-0"></div>
+          <div className="flex items-center gap-1.5">
+            <a href={gmailComposeUrlHeader} target="_blank" className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-full text-[10px] font-bold uppercase tracking-widest transition-all shadow-lg whitespace-nowrap">Hire Me</a>
           </div>
         </div>
       </nav>
 
-      {/* Modern High-End Hero Section */}
-      <header className="min-h-screen flex items-center px-8 md:px-16 pt-32 pb-12 relative overflow-hidden bg-grid-subtle">
+      {/* Hero Section */}
+      <header className="min-h-screen flex items-center px-8 md:px-16 pt-32 pb-8 relative overflow-hidden bg-grid-subtle">
         <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
           <div className="lg:col-span-7 reveal text-left z-10 order-2 lg:order-1">
             <h1 className="text-6xl md:text-8xl xl:text-9xl font-black font-display tracking-tighter leading-[0.8] mb-12">
-              <span className="block mb-2">Rushikesh</span>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-200 to-zinc-600">Kulkarni</span>
+              <span className="block mb-2 text-transparent bg-clip-text bg-gradient-to-r from-white via-white/95 to-white/85">Rushikesh</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-200 via-zinc-300 to-white/70">Kulkarni</span>
             </h1>
 
             <div className="space-y-8 max-w-2xl">
@@ -216,9 +245,8 @@ const App: React.FC = () => {
             </div>
           </div>
 
-          <div className="lg:col-span-5 reveal flex justify-center lg:justify-end relative order-1 lg:order-2">
+          <div className="lg:col-span-5 reveal flex justify-center lg:justify-end relative order-1 lg:order-2 mb-12 lg:mb-0">
             <div className="relative w-64 h-64 md:w-96 md:h-96 lg:w-[450px] lg:h-[450px]">
-              {/* Profile Image with Circular Frame */}
               <div className="w-full h-full rounded-full overflow-hidden p-1.5 bg-gradient-to-tr from-indigo-500/40 via-white/10 to-transparent border border-white/10 backdrop-blur-md relative z-10 shadow-[0_0_80px_-20px_rgba(99,102,241,0.3)] group">
                 <div className="w-full h-full rounded-full overflow-hidden transition-all duration-1000">
                   <img 
@@ -229,27 +257,32 @@ const App: React.FC = () => {
                   />
                 </div>
               </div>
-              
-              {/* Decorative elements */}
               <div className="absolute -top-10 -right-10 w-40 h-40 bg-indigo-500/20 blur-[80px] rounded-full -z-10 animate-pulse"></div>
               <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-blue-500/10 blur-[80px] rounded-full -z-10 animate-pulse" style={{ animationDelay: '1s' }}></div>
             </div>
           </div>
         </div>
-        
-        {/* Abstract Background Decoration */}
-        <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-indigo-500/[0.02] border border-white/[0.02] rounded-full -mr-64 pointer-events-none"></div>
       </header>
 
       {/* Impact Section */}
-      <section id="impact" className="pt-12 pb-24 px-8 max-w-7xl mx-auto">
-        <div className="reveal mb-12 flex justify-between items-end border-b border-white/5 pb-10">
-          <h2 className="text-3xl md:text-6xl font-black tracking-tighter font-display uppercase">Product Impact</h2>
-          <p className="text-[10px] font-bold text-zinc-600 uppercase tracking-[0.4em] mb-3">Case Studies</p>
+      <section id="impact" className="pt-12 pb-24 px-8 max-w-7xl mx-auto relative overflow-visible">
+        <div className="reveal mb-12 flex flex-col md:flex-row justify-between items-start md:items-end border-b border-white/5 pb-10 gap-4">
+          <h2 className="text-3xl md:text-5xl font-black tracking-tighter font-display leading-[0.8] uppercase text-transparent bg-clip-text bg-gradient-to-r from-white via-white/95 to-white/85">PRODUCT IMPACT</h2>
+          <p className="text-[10px] font-bold text-zinc-600 uppercase tracking-[0.4em] mb-3 md:mb-5 shrink-0">Case Studies</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {PROJECTS.map((project, idx) => (
-            <div key={idx} onClick={() => setSelectedProject(project)} className="reveal group relative p-10 glass-card rounded-[2.5rem] hover:bg-zinc-900/40 transition-all duration-700 cursor-pointer overflow-hidden border-transparent hover:border-indigo-500/20">
+            <div 
+              key={idx} 
+              onClick={() => {
+                if (project.title === "Homepage & Discovery Revamp") {
+                  setCurrentView('case-study');
+                } else {
+                  setSelectedProject(project);
+                }
+              }} 
+              className="reveal group relative p-10 glass-card rounded-[2.5rem] hover:bg-zinc-900/40 transition-all duration-700 cursor-pointer border-transparent hover:border-indigo-500/20"
+            >
               <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-100 transition-opacity duration-500 text-indigo-500"><ArrowUpRight size={32} /></div>
               <div className="flex flex-wrap gap-2 mb-6">
                 {project.tags.map(tag => (
@@ -269,9 +302,9 @@ const App: React.FC = () => {
       </section>
 
       {/* Experience Section */}
-      <section id="experience" ref={experienceRef} className="py-16 px-8 max-w-6xl mx-auto relative">
+      <section id="experience" ref={experienceRef} className="py-16 px-8 max-w-6xl mx-auto relative overflow-visible">
         <div className="reveal mb-16">
-          <h2 className="text-3xl md:text-6xl font-black tracking-tighter font-display uppercase">Career</h2>
+          <h2 className="text-3xl md:text-5xl font-black tracking-tighter font-display leading-[0.8] uppercase text-transparent bg-clip-text bg-gradient-to-r from-white via-white/95 to-white/85">CAREER</h2>
         </div>
         <div className="relative">
           <div className="absolute left-0 top-0 bottom-0 w-px bg-zinc-900">
@@ -285,20 +318,19 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* Balanced About Section */}
-      <section id="about" className="py-16 px-8 max-w-7xl mx-auto">
-        <div className="reveal mb-8 border-b border-white/5 pb-8">
-          <h2 className="text-3xl md:text-5xl font-black tracking-tighter font-display uppercase">About</h2>
+      {/* About Section */}
+      <section id="about" className="py-16 px-8 max-w-7xl mx-auto relative overflow-visible">
+        <div className="reveal mb-12 border-b border-white/5 pb-8">
+          <h2 className="text-3xl md:text-5xl font-black tracking-tighter font-display leading-[0.8] uppercase text-transparent bg-clip-text bg-gradient-to-r from-white via-white/95 to-white/85">ABOUT</h2>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-          {/* Left Column: Core Expertise & Education */}
           <div className="space-y-10">
             <div className="reveal space-y-4">
               <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-zinc-600">Core Expertise</h3>
               <div className="flex flex-wrap gap-2">
                 {SKILLS.map(skill => (
-                  <span key={skill} className="px-2.5 py-1.5 bg-zinc-950 border border-white/5 rounded-md text-[9px] font-bold uppercase tracking-widest text-zinc-500 hover:text-white transition-all hover:border-indigo-500/20">
+                  <span key={skill} className="px-2.5 py-1.5 bg-zinc-950 border border-white/5 rounded-md text-[9px] font-bold uppercase tracking-widest text-zinc-500 hover:text-white transition-all">
                     {skill}
                   </span>
                 ))}
@@ -320,7 +352,6 @@ const App: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Recognitions */}
           <div className="reveal space-y-4">
             <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-zinc-600">Recognitions</h3>
             <div className="flex flex-col gap-2.5">
@@ -345,7 +376,7 @@ const App: React.FC = () => {
       <section className="py-24 px-8 bg-zinc-950/20 relative overflow-hidden">
         <div className="reveal max-w-5xl mx-auto flex flex-col md:flex-row gap-16 items-start">
           <div className="md:w-1/2">
-            <h2 className="text-4xl md:text-7xl font-black mb-8 tracking-tighter font-display leading-[0.9]">Let's build <br/><span className="text-zinc-800">together</span></h2>
+            <h2 className="text-3xl md:text-5xl font-black mb-8 tracking-tighter font-display leading-[0.8] uppercase text-transparent bg-clip-text bg-gradient-to-r from-white via-white/95 to-white/85">LET'S BUILD <br/><span className="text-zinc-800">TOGETHER</span></h2>
             <p className="text-zinc-500 text-lg font-light mb-12">Open to high-impact product roles, GenAI consults, or just a virtual coffee.</p>
             <div className="flex flex-col gap-6 w-full">
               <div className="flex items-center gap-8">

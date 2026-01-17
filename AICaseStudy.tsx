@@ -60,7 +60,7 @@ const N8NNode: React.FC<{
           <div className={`p-2 rounded-lg ${getIconBg()}`}>
             {React.cloneElement(icon as React.ReactElement, { size: 18, strokeWidth: 2 })}
           </div>
-          <p className="text-[11px] font-black text-white tracking-tight uppercase leading-tight">{title}</p>
+          <p className="text-[11px] font-black text-white tracking-wider uppercase leading-tight">{title}</p>
         </div>
         {subTitle && (
           <p className="text-[9px] font-medium text-zinc-500 tracking-wider uppercase leading-snug">
@@ -91,7 +91,7 @@ const N8NCanvas: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-auto md:h-[850px] bg-[#0a0a0a] rounded-[2rem] md:rounded-[3rem] border border-white/5 overflow-hidden shadow-2xl p-6 md:p-0">
+    <div className="relative w-full h-auto md:h-[850px] bg-[#0a0a0a] rounded-[2rem] md:rounded-[3rem] border border-white/5 overflow-visible md:overflow-hidden shadow-2xl p-4 sm:p-6 md:p-0">
       {/* n8n Dotted Grid */}
       <div className="absolute inset-0 opacity-[0.2] pointer-events-none" 
            style={{ backgroundImage: 'radial-gradient(circle, #444 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
@@ -134,74 +134,74 @@ const N8NCanvas: React.FC = () => {
         </circle>
       </svg>
 
-      {/* STACKED LAYOUT (RESPONSIVE) */}
-      <div className="flex flex-col md:block gap-2 relative z-10 h-full">
+      {/* MOBILE + DESKTOP STACKED CONTENT */}
+      <div className="flex flex-col md:block gap-2 relative z-10 w-full pb-8 md:pb-0">
         {/* Loop 1: Factory */}
-        <div className="md:hidden text-[10px] font-black uppercase tracking-[0.5em] text-[#ff6d5a] opacity-50 mb-4 mt-4 text-center">Creative Factory</div>
+        <div className="md:hidden text-[10px] font-black uppercase tracking-[0.5em] text-[#ff6d5a] opacity-50 mb-6 mt-6 text-center">Creative Factory</div>
         
-        <div className="flex flex-col items-center md:block">
+        <div className="flex flex-col items-center md:block w-full">
           <N8NNode 
             title="Start Merch Template" subTitle="🚀 Demand Entry Point" icon={<Rocket />} 
-            type="trigger" className="md:absolute w-full" style={{ left: '60px', top: '155px' }} 
+            type="trigger" className="md:absolute w-full max-w-[340px] md:max-w-none" style={{ left: '60px', top: '155px' }} 
             active={activeStep === 0}
           />
-          <ArrowDown size={16} className="md:hidden text-[#ff6d5a] my-2 opacity-50" />
+          <ArrowDown size={18} className="md:hidden text-[#ff6d5a] my-3 opacity-60 animate-bounce" />
           <N8NNode 
             title="Gemini Flash" subTitle="🤖 Prompt Engineer" icon={<MessageSquareText />} 
-            type="ai" className="md:absolute w-full" style={{ left: '330px', top: '155px' }} 
+            type="ai" className="md:absolute w-full max-w-[340px] md:max-w-none" style={{ left: '330px', top: '155px' }} 
             active={activeStep === 1}
           />
-          <ArrowDown size={16} className="md:hidden text-[#9c27b0] my-2 opacity-50" />
+          <ArrowDown size={18} className="md:hidden text-[#9c27b0] my-3 opacity-60 animate-bounce" />
           <N8NNode 
             title="Gemini Pro Vision 3" subTitle="🎨 Asset Generation" icon={<Sparkles />} 
-            type="ai" className="md:absolute w-full" style={{ left: '620px', top: '155px' }} 
+            type="ai" className="md:absolute w-full max-w-[340px] md:max-w-none" style={{ left: '620px', top: '155px' }} 
             active={activeStep === 2}
           />
-          <ArrowDown size={16} className="md:hidden text-[#9c27b0] my-2 opacity-50" />
+          <ArrowDown size={18} className="md:hidden text-[#9c27b0] my-3 opacity-60 animate-bounce" />
           <N8NNode 
             title="Content Bank" subTitle="🗄️ Human Approval Gate" icon={<UserCheck />} 
-            type="db" className="md:absolute w-full" style={{ left: '910px', top: '155px' }} 
+            type="db" className="md:absolute w-full max-w-[340px] md:max-w-none" style={{ left: '910px', top: '155px' }} 
             active={activeStep === 3}
           />
         </div>
 
-        <div className="md:hidden h-px bg-white/10 my-10 relative">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#0a0a0a] px-4">
-             <ChevronRight className="rotate-90 text-[#1565c0]" size={20} />
+        <div className="md:hidden h-px bg-white/10 my-12 relative w-full">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#0a0a0a] px-5 py-2 rounded-full border border-white/5">
+             <ChevronRight className="rotate-90 text-[#1565c0]" size={24} />
           </div>
         </div>
 
         {/* Loop 2: Live Ops */}
-        <div className="md:hidden text-[10px] font-black uppercase tracking-[0.5em] text-[#1565c0] opacity-50 mb-4 text-center">Live Operations</div>
+        <div className="md:hidden text-[10px] font-black uppercase tracking-[0.5em] text-[#1565c0] opacity-50 mb-6 text-center">Live Operations</div>
         
-        <div className="flex flex-col items-center md:block">
+        <div className="flex flex-col items-center md:block w-full">
           <N8NNode 
             title="Banner Selector Agent" subTitle="🧠 Smart Filters Logic" icon={<Search />} 
-            type="logic" className="md:absolute w-full" style={{ left: '800px', top: '475px' }} 
+            type="logic" className="md:absolute w-full max-w-[340px] md:max-w-none" style={{ left: '800px', top: '475px' }} 
             active={activeStep === 4}
           />
-          <ArrowDown size={16} className="md:hidden text-[#455a64] my-2 opacity-50" />
+          <ArrowDown size={18} className="md:hidden text-[#455a64] my-3 opacity-60 animate-bounce" />
           <N8NNode 
             title="Promotion & Page APIs" subTitle="🔌 Deployment Engine" icon={<RotateCw />} 
-            type="logic" className="md:absolute w-full" style={{ left: '510px', top: '475px' }} 
+            type="logic" className="md:absolute w-full max-w-[340px] md:max-w-none" style={{ left: '510px', top: '475px' }} 
             active={activeStep === 5}
           />
-          <ArrowDown size={16} className="md:hidden text-[#455a64] my-2 opacity-50" />
+          <ArrowDown size={18} className="md:hidden text-[#455a64] my-3 opacity-60 animate-bounce" />
           <N8NNode 
             title="LIVE Homepage Slots" subTitle="🟢 User Interaction" icon={<Monitor />} 
-            type="live" className="md:absolute w-full" style={{ left: '220px', top: '475px' }} 
+            type="live" className="md:absolute w-full max-w-[340px] md:max-w-none" style={{ left: '220px', top: '475px' }} 
             active={activeStep === 6}
           />
-          <ArrowDown size={16} className="md:hidden text-[#2e7d32] my-2 opacity-50" />
+          <ArrowDown size={18} className="md:hidden text-[#2e7d32] my-3 opacity-60 animate-bounce" />
           <N8NNode 
             title="BigQuery" subTitle="📊 Performance Tracking" icon={<LineChart />} 
-            type="analytics" className="md:absolute w-full" style={{ left: '220px', top: '635px' }} 
+            type="analytics" className="md:absolute w-full max-w-[340px] md:max-w-none" style={{ left: '220px', top: '635px' }} 
             active={activeStep === 7}
           />
-          <ArrowDown size={16} className="md:hidden text-[#ef6c00] my-2 opacity-50" />
+          <ArrowDown size={18} className="md:hidden text-[#ef6c00] my-3 opacity-60 animate-bounce" />
           <N8NNode 
             title="Auto-Reranking Engine" subTitle="🔄 4-Hour Optimization" icon={<RefreshCw />} 
-            type="analytics" className="md:absolute w-full" style={{ left: '800px', top: '635px' }} 
+            type="analytics" className="md:absolute w-full max-w-[340px] md:max-w-none" style={{ left: '800px', top: '635px' }} 
             active={activeStep === 8}
           />
         </div>

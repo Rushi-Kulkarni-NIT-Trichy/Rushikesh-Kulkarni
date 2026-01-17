@@ -241,7 +241,7 @@ const App: React.FC = () => {
                   </div>
                 </div>
 
-                <h3 className="text-3xl font-bold mb-4 font-display leading-tight text-white group-hover:translate-x-1 transition-transform duration-300 uppercase">
+                <h3 className="text-3xl font-bold mb-4 font-display leading-tight text-white group-hover:translate-x-1 transition-transform duration-300 uppercase tracking-normal">
                   {project.title}
                 </h3>
 

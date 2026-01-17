@@ -155,7 +155,7 @@ const CaseStudy: React.FC<CaseStudyProps> = ({ project, onBack }) => {
                 >
                    {m.icon}
                    <div className="flex flex-col">
-                     <span className="text-xl font-black text-white font-display tracking-tighter uppercase">{m.value}</span>
+                     <span className="text-xl font-black text-white font-display tracking-normal uppercase">{m.value}</span>
                      <span className="text-[9px] font-black text-zinc-500 uppercase tracking-widest">{m.label}</span>
                    </div>
                 </div>
@@ -284,7 +284,7 @@ const CaseStudy: React.FC<CaseStudyProps> = ({ project, onBack }) => {
                   const isCrMonth = metric.includes('Cr/month');
                   return (
                     <div key={i} className={`glass-card p-10 rounded-[2.5rem] border-white/5 bg-zinc-950/40 hover:border-indigo-500/30 transition-all group ${isCrMonth ? 'sm:col-span-2' : ''}`}>
-                      <div className={`font-black text-white mb-3 font-display tracking-tighter group-hover:scale-105 transition-transform origin-left whitespace-nowrap ${isCrMonth ? 'text-4xl md:text-6xl lg:text-7xl' : 'text-4xl md:text-6xl'}`}>
+                      <div className={`font-black text-white mb-3 font-display transition-transform origin-left whitespace-nowrap tracking-normal ${isCrMonth ? 'text-4xl md:text-6xl lg:text-7xl' : 'text-4xl md:text-6xl'}`}>
                         {isCrMonth ? metric.replace(' potential', '') : metric.split(' ')[0]}
                       </div>
                       {!isCrMonth && (
@@ -316,7 +316,7 @@ const CaseStudy: React.FC<CaseStudyProps> = ({ project, onBack }) => {
                     {i === 0 ? <Target className="text-indigo-500" size={24} /> : i === 1 ? <CheckCircle2 className="text-indigo-400" size={24} /> : <Zap className="text-indigo-300" size={24} />}
                   </div>
                   <div>
-                    <h4 className="font-bold text-2xl md:text-3xl mb-3 text-white font-display tracking-tight uppercase">{item.title}</h4>
+                    <h4 className="font-bold text-2xl md:text-3xl mb-3 text-white font-display tracking-normal uppercase">{item.title}</h4>
                     <p className="text-zinc-200 leading-relaxed font-light text-lg md:text-xl">{item.desc}</p>
                   </div>
                 </div>

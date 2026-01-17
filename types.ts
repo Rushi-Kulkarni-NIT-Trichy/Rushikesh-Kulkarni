@@ -1,4 +1,19 @@
 
+export interface CaseStudyContent {
+  goalTitle: string;
+  goalDescription: string;
+  problemTitle: string;
+  problemDescription: string;
+  problemImpact: string;
+  redesignTitle: string;
+  legacyImage: string;
+  newImages: string[];
+  takeaways: {
+    title: string;
+    desc: string;
+  }[];
+}
+
 export interface WorkExperience {
   company: string;
   role: string;
@@ -12,6 +27,7 @@ export interface ImpactProject {
   description: string;
   metrics: string[];
   tags: string[];
+  caseStudy?: CaseStudyContent;
 }
 
 export interface Award {

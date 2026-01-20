@@ -193,13 +193,13 @@ const CaseStudy: React.FC<CaseStudyProps> = ({ project, onBack }) => {
               <h2 className="text-2xl md:text-5xl font-black font-display tracking-tight uppercase leading-[1.1] text-white">{cs.problemTitle}</h2>
             </div>
             <div className="lg:col-span-8">
-              <p className="text-xl md:text-2xl text-zinc-200 leading-relaxed font-light mb-8">
+              <p className="text-xl md:text-2xl text-zinc-200 leading-relaxed font-light mb-12">
                 {cs.problemDescription}
               </p>
-              <div className="flex items-center gap-6 mt-6">
+              <div className="flex items-center gap-6 pt-6 border-t border-white/5">
                 <div className="flex flex-col">
                   <span className="text-[9px] font-black uppercase tracking-[0.3em] text-zinc-600 mb-2">Key Insight</span>
-                  <span className="text-white font-bold text-xl uppercase tracking-tighter leading-tight">{cs.problemImpact}</span>
+                  <span className="text-white font-bold text-xl md:text-2xl uppercase tracking-tighter leading-tight max-w-2xl">{cs.problemImpact}</span>
                 </div>
               </div>
             </div>

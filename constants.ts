@@ -71,15 +71,15 @@ export const PROJECTS: ImpactProject[] = [
   },
   {
     title: "Purplle Display Ads (PDP)",
-    description: "Responsible Monetization on Conversion-Critical Surfaces. Launched premium placements unlocking ₹2 Cr/month while protecting core conversion metrics.",
+    description: "Responsible Monetization on Conversion-Critical Surfaces. Launched premium placements unlocking ₹2 Cr/month while protecting user trust and core conversion metrics.",
     metrics: ["₹2 Cr/month potential", "Context-aware logic", "Conversion-safe"],
     tags: ["Monetization", "AdTech", "UX Safeguards"],
     caseStudy: {
       goalTitle: "Monetizing PDPs Without Compromising Trust",
       goalDescription: "PDPs are the most conversion-sensitive surface in the funnel. The goal was to introduce brand visibility through advertising without degrading decision confidence, purchase intent, or house-brand performance.",
-      problemTitle: "UX & Revenue Cannibalization Risk",
-      problemDescription: "PDPs represent the final stage of user decision-making. Poorly governed ad exposure risked eroding user trust through irrelevant placements, cannibalizing sales of high-margin products, and creating long-term damage in exchange for short-term ad revenue.",
-      problemImpact: "Protecting Conversion Integrity",
+      problemTitle: "UX & Revenue Loss Risk",
+      problemDescription: "PDPs represent the final stage of user decision-making. Poorly governed ad exposure risked eroding user trust through irrelevant placements, causing revenue loss of high-margin or strategically important products, and creating long-term damage in exchange for short-term ad revenue.",
+      problemImpact: "UX & Revenue Loss Risk",
       redesignTitle: "Context-Aware, Guardrailed Ad Architecture",
       legacyImage: "https://i.postimg.cc/FzpKsZ9G/Whats-App-Image-2026-01-18-at-1-25-03-AM.jpg",
       newImages: [
@@ -92,7 +92,7 @@ export const PROJECTS: ImpactProject[] = [
         },
         { 
           title: "Relevance Drives Acceptance", 
-          desc: "Limiting ad inventory to contextually aligned categories prevents cannibalization and maintains a high-quality user experience." 
+          desc: "Limiting ad inventory to contextually aligned categories prevents revenue loss and maintains a high-quality user experience." 
         },
         { 
           title: "Scalable Governance Enables Growth", 
@@ -103,14 +103,14 @@ export const PROJECTS: ImpactProject[] = [
   },
   {
     title: "GenAI Visual Filters",
-    description: "Intent-Led Discovery Through Semantic Navigation. Launched visual filters across high-traffic listing pages enabling faster product discovery and uplift in conversion.",
-    metrics: ["+5.3% Conversion Uplift", "-20% Exit Rate", "10% Buyer Adoption"],
+    description: "Intent-Led Discovery Through Semantic Navigation. Launched visual filters across high-traffic listing pages enabling faster product discovery and improving conversion through intent-aligned navigation.",
+    metrics: ["+5.3% Conversion uplift", "–20% Exit rate", "10% buyer adoption"],
     tags: ["Discovery", "GenAI", "Data Enrichment"],
     caseStudy: {
       goalTitle: "Streamlining Product Selection",
-      goalDescription: "The objective was to reduce friction in product discovery by aligning navigation with how shoppers actually think and decide. By surfacing intent-led shortcuts, we aimed to lower cognitive load and accelerate decision-making.",
+      goalDescription: "The objective was to reduce friction in product discovery by aligning navigation with how shoppers actually think and decide. By surfacing intent-led shortcuts, we aimed to lower cognitive load and accelerate decision-making on search and listing pages.",
       problemTitle: "Unstructured, Attribute-Heavy Discovery",
-      problemDescription: "Discovery was previously limited to generic catalog attributes. Beauty journeys are category-specific (e.g., skin type, finish), but these nuanced signals were not structurally available due to missing semantic tagging, resulting in high friction and slow discovery loops.",
+      problemDescription: "Discovery was previously limited to generic catalog attributes. However, beauty shopping journeys are highly category-specific (e.g., skin type for cleansers, finish for lipsticks, texture for haircare). These signals were not available, resulting in high navigational friction and increased exits.",
       problemImpact: "Discovery Is Category-Specific, Not Universal",
       redesignTitle: "Semantic Tagging + Visual Navigation",
       legacyImage: "https://i.postimg.cc/52VSY97T/Whats-App-Image-2026-01-18-at-2-02-10-AM-(1).jpg",

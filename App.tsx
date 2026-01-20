@@ -181,17 +181,19 @@ const App: React.FC = () => {
       <header className="min-h-screen flex items-center px-8 md:px-16 pt-32 pb-8 relative overflow-hidden bg-grid-subtle">
         <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           <div className="lg:col-span-7 reveal text-left z-10 order-2 lg:order-1">
-            <h1 className="text-[14vw] sm:text-[12vw] md:text-[8vw] lg:text-[7.5vw] xl:text-[8.5rem] font-black font-display tracking-tighter leading-[0.85] mb-12">
+            <h1 className="text-[14vw] sm:text-[12vw] md:text-[8vw] lg:text-[7.5vw] xl:text-[8.5rem] font-black font-display tracking-tighter leading-[0.85] mb-10">
               <span className="block mb-2 text-transparent bg-clip-text bg-gradient-to-r from-white via-white/80 to-white/10">Rushikesh</span>
               <span className="block text-transparent bg-clip-text bg-gradient-to-r from-zinc-800 via-zinc-900 to-transparent transition-all duration-700 hover:from-indigo-500/20 hover:to-transparent">Kulkarni</span>
             </h1>
-            <div className="space-y-10 max-w-2xl">
-              <p className="text-xl md:text-3xl font-display font-medium text-indigo-100/90 leading-tight">
-                Associate Product Manager @ Purplle. <br className="hidden md:block"/>
-                <span className="text-zinc-500">Designing the future of browse & discovery.</span>
+            <div className="space-y-8 max-w-2xl">
+              <p className="text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-indigo-400/80">
+                APM @ Purplle • NIT Trichy ’20 • B2C | Growth | AdTech | GenAI
+              </p>
+              <p className="text-2xl md:text-4xl font-display font-bold text-white leading-tight">
+                Product Manager building <span className="text-indigo-400">intent-led</span>, AI-powered consumer experiences that drive revenue
               </p>
               <p className="text-base md:text-lg text-zinc-400 leading-relaxed font-light">
-                NIT Trichy Alum with a focus on data-driven growth, AdTech monetization, and agentic AI workflows. I translate user intent into scalable business value.
+                I own Browse & Discovery at Purplle, driving engagement, conversion, and monetization at scale — from Homepage & PDP revamps to AdTech and agentic AI automation.
               </p>
             </div>
           </div>
@@ -380,7 +382,7 @@ const App: React.FC = () => {
         <div className="reveal max-w-5xl mx-auto flex flex-col md:flex-row gap-16 items-start">
           <div className="md:w-1/2">
             <h2 className="text-3xl md:text-5xl font-black mb-8 tracking-tighter font-display leading-[0.8] uppercase text-transparent bg-clip-text bg-gradient-to-r from-white via-white/95 to-white/85">LET'S BUILD <br/><span className="text-zinc-800">TOGETHER</span></h2>
-            <p className="text-zinc-500 text-lg font-light mb-12">Open to high-impact product roles, GenAI consults, or just a virtual coffee.</p>
+            <p className="text-zinc-500 text-lg font-light mb-12">I am always open to high-impact product roles, GenAI collaborations, or strategic consulting.</p>
             <div className="flex flex-col gap-6 w-full">
               <div className="flex items-center gap-8">
                 <a href="https://linkedin.com/in/rushikulkarni" target="_blank" className="text-zinc-700 hover:text-white transition-all"><Linkedin size={32} /></a>
@@ -408,7 +410,7 @@ const App: React.FC = () => {
                 />
               </div>
               <textarea 
-                placeholder="Your Message" 
+                placeholder="How can I help you?" 
                 rows={4} 
                 required
                 value={message}

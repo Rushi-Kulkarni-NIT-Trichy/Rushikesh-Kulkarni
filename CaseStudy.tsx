@@ -173,7 +173,7 @@ const CaseStudy: React.FC<CaseStudyProps> = ({ project, onBack }) => {
                 <Target size={16} className="text-indigo-500" />
                 <span className="text-[10px] font-black uppercase tracking-[0.4em] text-zinc-600">Goal</span>
               </div>
-              <h2 className="text-2xl md:text-5xl font-black font-display tracking-tight uppercase leading-none text-white">{cs.goalTitle}</h2>
+              <h2 className="text-2xl md:text-5xl font-black font-display tracking-tight uppercase leading-[1.1] text-white">{cs.goalTitle}</h2>
             </div>
             <div className="lg:col-span-8">
               <p className="text-xl md:text-2xl text-zinc-200 leading-relaxed font-light">
@@ -190,18 +190,16 @@ const CaseStudy: React.FC<CaseStudyProps> = ({ project, onBack }) => {
                 <AlertCircle size={16} className="text-red-500" />
                 <span className="text-[10px] font-black uppercase tracking-[0.4em] text-zinc-600">Problem</span>
               </div>
-              <h2 className="text-2xl md:text-5xl font-black font-display tracking-tight uppercase leading-none text-white">{cs.problemTitle}</h2>
+              <h2 className="text-2xl md:text-5xl font-black font-display tracking-tight uppercase leading-[1.1] text-white">{cs.problemTitle}</h2>
             </div>
             <div className="lg:col-span-8">
-              <div className="glass-card p-8 md:p-10 rounded-[2rem] border-red-500/10 bg-zinc-950/40">
-                <p className="text-lg md:text-2xl text-zinc-100 leading-relaxed font-light mb-6">
-                  {cs.problemDescription}
-                </p>
-                <div className="flex flex-wrap gap-4">
-                  <div className="px-6 py-3 rounded-2xl bg-white/5 border border-white/10">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500 block mb-0.5">Primary Impact</span>
-                    <span className="text-white font-bold text-lg md:text-xl uppercase tracking-tighter">{cs.problemImpact}</span>
-                  </div>
+              <p className="text-xl md:text-2xl text-zinc-200 leading-relaxed font-light mb-8">
+                {cs.problemDescription}
+              </p>
+              <div className="flex items-center gap-6 mt-6">
+                <div className="flex flex-col">
+                  <span className="text-[9px] font-black uppercase tracking-[0.3em] text-zinc-600 mb-2">Key Insight</span>
+                  <span className="text-white font-bold text-xl uppercase tracking-tighter leading-tight">{cs.problemImpact}</span>
                 </div>
               </div>
             </div>
@@ -215,7 +213,7 @@ const CaseStudy: React.FC<CaseStudyProps> = ({ project, onBack }) => {
                 <Zap size={16} className="text-green-500" />
                 <span className="text-[10px] font-black uppercase tracking-[0.4em] text-zinc-600">Architecture</span>
               </div>
-              <h2 className="text-2xl md:text-5xl font-black font-display tracking-tight uppercase leading-none text-white">{cs.redesignTitle}</h2>
+              <h2 className="text-2xl md:text-5xl font-black font-display tracking-tight uppercase leading-[1.1] text-white">{cs.redesignTitle}</h2>
             </div>
             <div className="lg:col-span-8">
               {isAIProject ? (
@@ -276,7 +274,7 @@ const CaseStudy: React.FC<CaseStudyProps> = ({ project, onBack }) => {
                 <Rocket size={16} className="text-indigo-500" />
                 <span className="text-[10px] font-black uppercase tracking-[0.4em] text-zinc-600">Impact</span>
               </div>
-              <h2 className="text-2xl md:text-5xl font-black font-display tracking-tight uppercase leading-none text-white">Business Outcomes</h2>
+              <h2 className="text-2xl md:text-5xl font-black font-display tracking-tight uppercase leading-[1.1] text-white">Business Outcomes</h2>
             </div>
             <div className="lg:col-span-8">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
@@ -307,7 +305,7 @@ const CaseStudy: React.FC<CaseStudyProps> = ({ project, onBack }) => {
                 <Lightbulb size={16} className="text-indigo-400" />
                 <span className="text-[10px] font-black uppercase tracking-[0.4em] text-zinc-600">Learnings</span>
               </div>
-              <h2 className="text-2xl md:text-5xl font-black font-display tracking-tight uppercase leading-none text-white">Strategic Insights</h2>
+              <h2 className="text-2xl md:text-5xl font-black font-display tracking-tight uppercase leading-[1.1] text-white">Strategic Insights</h2>
             </div>
             <div className="lg:col-span-8 space-y-4 lg:space-y-8">
               {cs.takeaways.map((item, i) => (
@@ -325,7 +323,6 @@ const CaseStudy: React.FC<CaseStudyProps> = ({ project, onBack }) => {
           </div>
         </section>
 
-        {/* Action Button at the very bottom */}
         <div className="reveal mt-32 flex justify-center">
           <button 
             onClick={onBack}

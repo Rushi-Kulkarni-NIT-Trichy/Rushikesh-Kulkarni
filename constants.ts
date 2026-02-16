@@ -14,7 +14,7 @@ export const PROJECTS: ImpactProject[] = [
   {
     title: "Homepage Revamp",
     description: "Redesigned Purplle’s homepage from a brand-led banner stack into an intent-driven discovery engine — aligning entry points with real user needs and driving meaningful business impact.",
-    metrics: ["+9.1% Revenue/MAU", "-25% Exit Rate", "+12% Multi-Category Visits"],
+    metrics: ["+9.1% Revenue/MAU", "-24% Exit Rate", "+12% Multi-Category Visits"],
     tags: ["Product Strategy", "UX", "A/B Testing"],
     caseStudy: {
       goalTitle: "Reimagining the First Impression",
@@ -113,7 +113,7 @@ export const PROJECTS: ImpactProject[] = [
       problemDescription: "Discovery was previously limited to generic catalog attributes. However, beauty shopping journeys are highly category-specific (e.g., skin type for cleansers, finish for lipsticks, texture for haircare). These signals were not available, resulting in high navigational friction and increased exits.",
       problemImpact: "Discovery Is Category-Specific, Not Universal",
       redesignTitle: "Semantic Tagging + Visual Navigation",
-      legacyImage: "https://i.postimg.cc/52VSY97T/Whats-App-Image-2026-01-18-at-2-02-10-AM-(1).jpg",
+      legacyImage: "https://i.postimg.cc/jjSLckQs/Whats-App-Image-2026-01-18-at-2-02-10-AM-(1).jpg",
       newImages: [
         "https://i.postimg.cc/4xgQ74bS/Whats-App-Image-2026-01-18-at-2-02-09-AM.jpg",
         "https://i.postimg.cc/vZstg8Lj/Whats-App-Image-2026-01-18-at-2-02-10-AM.jpg"
@@ -140,23 +140,25 @@ export const EXPERIENCE: WorkExperience[] = [
   {
     company: "Purplle",
     role: "Associate Product Manager",
-    period: "Aug 2024 - Present",
+    period: "Aug 2024 – Present",
     highlights: [
-      "Directed the Homepage first-fold redesign, driving a 9.1% lift in Revenue/MAU and a 25% reduction in exit rates.",
-      "Automated merchandising production through Agentic AI workflows, reducing manual effort by ~90%.",
-      "Engineered the 'Purplle Display Ads' (PDA) monetization suite, unlocking ₹2 Cr/month in revenue potential.",
-      "Optimized PDP conversion by 15% through the launch of high-intent widgets and real-time shipping (Flash ETA).",
-      "Pioneered semantic visual filters and GenAI-powered review summaries to improve shopping trust and relevance."
+      "Homepage & Discovery Revamp: Revamped the App Homepage, launching a Cover Widget and use-case–led journeys via user insights and A/B testing, driving a 9.1% lift in Revenue/MAU and 24% drop in exit rate",
+      "Agentic AI Workflows (n8n): Built GenAI n8n workflows for PDP image and banner generation, automating in-app banner updates and reducing design and merchandising effort by 90%, driving +13% ATCs/slot",
+      "AI-Powered Discovery: Launched AI-tagging-driven Visual Filters to surface nuanced use cases on listing pages, reducing bounce rate by 20% and increasing conversion by 5.3%",
+      "PDP Engagement & Conversion: Improved PDP conversion by enhancing Flash ETA, revamping the review section using AI, and launching Range & Routine widgets, resulting in a 14% lift in engagement and +4% in ATC/visitor",
+      "Monetization via AdTech: Built Purplle Display Ads (PDA) and a selective placement control panel, unlocking 2 Cr/month revenue potential",
+      "Personalized Merchandising: Deployed segmented banners (+18% CTR) and product widgets (+8.2% ATCu/IMPu) to personalize discovery based on user behavior and affinities"
     ]
   },
   {
     company: "Purplle",
     role: "Revenue Analytics Manager",
-    period: "Jan 2023 - Aug 2024",
+    period: "Jan 2023 – Aug 2024",
     highlights: [
-      "Developed a robust SKU-level RFID distribution model for 2,000+ items to optimize supply chain efficiency.",
-      "Spearheaded analytics and merchandising strategies that contributed to 38% YoY revenue growth.",
-      "Created a centralized merchandise scorecard that reduced impression wastage by 7%."
+      "RFID Model: Developed impression allocation system (2,000+ SKUs), driving +6% revenue/user through improved distribution efficiency",
+      "Revenue Strategy Execution: Led analytics, merchandising, and pricing to drive the revenue strategy at Purplle, contributing to 38% YoY revenue growth",
+      "Merchandising Performance Improvement: Created a merch scorecard to identify high-performing slots, reduce impression wastage, and improve page quality, resulting in a 7% uplift in ATCu/visitor",
+      "Analytics Leadership & Enablement: Led a 3-member analytics team and trained 25+ employees through hands-on sessions to scale org-wide data fluency"
     ]
   },
   {

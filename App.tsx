@@ -227,7 +227,7 @@ const App: React.FC = () => {
             <div 
               key={idx} 
               onClick={() => openCaseStudy(project)} 
-              className={`reveal group relative p-10 bg-zinc-950/40 border border-indigo-500/10 rounded-[2.5rem] hover:bg-indigo-500/[0.07] hover:border-indigo-500/40 transition-all duration-500 cursor-pointer overflow-hidden active:scale-[0.98] shadow-2xl hover:shadow-indigo-500/10 ${project.title.toLowerCase().includes('agentic') ? 'ring-1 ring-indigo-500/20' : ''}`}
+              className={`reveal group relative p-10 bg-zinc-950/40 border border-indigo-500/10 rounded-[2.5rem] hover:bg-indigo-500/[0.07] hover:border-indigo-500/40 transition-all duration-500 cursor-pointer overflow-hidden active:scale-[0.98] shadow-2xl hover:shadow-indigo-500/10 ring-1 ring-indigo-500/20`}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.03] to-transparent pointer-events-none"></div>
               
